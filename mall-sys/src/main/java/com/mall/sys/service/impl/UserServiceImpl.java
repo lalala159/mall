@@ -5,6 +5,9 @@ import com.mall.sys.dao.JkglUserDao;
 import com.mall.sys.domain.JkglUser;
 import com.mall.sys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  */
 @Service
+@CacheConfig(cacheNames="user")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -32,6 +36,7 @@ public class UserServiceImpl implements UserService {
         return 0;
     }
 
+    @Cacheable
     @Override
     public JkglUser selectByPrimaryKey(Integer id) {
         return jkglUserDao.selectByPrimaryKey(id);

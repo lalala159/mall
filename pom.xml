@@ -9,6 +9,7 @@
         <module>mall-sys</module>
         <module>mall-common</module>
         <module>mall-getway</module>
+        <module>mall-security</module>
     </modules>
     <dependencies>
         <dependency>
@@ -40,6 +41,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
