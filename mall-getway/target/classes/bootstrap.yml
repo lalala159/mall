@@ -1,0 +1,7 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: mall-getway
+  profiles:
+    active: dev

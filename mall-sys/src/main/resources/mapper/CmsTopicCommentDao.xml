@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.sys.dao.CmsTopicCommentDao">
+  <resultMap id="BaseResultMap" type="com.mall.sys.domain.CmsTopicComment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
+    <result column="topic_id" jdbcType="BIGINT" property="topicId" />
+    <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="show_status" jdbcType="INTEGER" property="showStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_nick_name, topic_id, member_icon, content, create_time, show_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_topic_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cms_topic_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.sys.domain.CmsTopicComment" useGeneratedKeys="true">
+    insert into cms_topic_comment (member_nick_name, topic_id, member_icon, 
+      content, create_time, show_status
+      )
+    values (#{memberNickName,jdbcType=VARCHAR}, #{topicId,jdbcType=BIGINT}, #{memberIcon,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{showStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.sys.domain.CmsTopicComment" useGeneratedKeys="true">
+    insert into cms_topic_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberNickName != null">
+        member_nick_name,
+      </if>
+      <if test="topicId != null">
+        topic_id,
+      </if>
+      <if test="memberIcon != null">
+        member_icon,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberNickName != null">
+        #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=BIGINT},
+      </if>
+      <if test="memberIcon != null">
+        #{memberIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.sys.domain.CmsTopicComment">
+    update cms_topic_comment
+    <set>
+      <if test="memberNickName != null">
+        member_nick_name = #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        topic_id = #{topicId,jdbcType=BIGINT},
+      </if>
+      <if test="memberIcon != null">
+        member_icon = #{memberIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.sys.domain.CmsTopicComment">
+    update cms_topic_comment
+    set member_nick_name = #{memberNickName,jdbcType=VARCHAR},
+      topic_id = #{topicId,jdbcType=BIGINT},
+      member_icon = #{memberIcon,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      show_status = #{showStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
