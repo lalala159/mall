@@ -1,0 +1,6 @@
+2020-05-22 14:22:02 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-22 14:47:52 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-22 15:08:05 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-22 15:20:36 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-22 15:26:22 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-22 15:33:02 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set

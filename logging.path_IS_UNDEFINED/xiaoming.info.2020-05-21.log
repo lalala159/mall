@@ -3301,3 +3301,89 @@ db0:keys=2,expires=0,avg_ttl=0
 2020-05-21 17:50:38 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2020-05-21 17:50:38 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
 2020-05-21 17:50:38 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-05-21 18:05:12 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-21 18:05:14 [restartedMain] INFO  c.a.cloud.nacos.client.NacosPropertySourceBuilder - Loading nacos data, dataId: 'mall-sys-dev.yaml', group: 'DEV_GROUP'
+2020-05-21 18:05:14 [restartedMain] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-mall-sys-dev.yaml'}, BootstrapPropertySource {name='bootstrapProperties-mall-sys.yaml'}]
+2020-05-21 18:05:14 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - The following profiles are active: dev
+2020-05-21 18:05:15 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:05:15 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:05:15 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-05-21 18:05:15 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-05-21 18:05:15 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12ms. Found 0 Redis repository interfaces.
+2020-05-21 18:05:15 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:05:16 [restartedMain] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=27542303-8b53-331a-9e36-9de7d2e951dc
+2020-05-21 18:05:16 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-05-21 18:05:17 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-05-21 18:05:17 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-05-21 18:05:17 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-05-21 18:05:17 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+2020-05-21 18:05:17 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring embedded WebApplicationContext
+2020-05-21 18:05:17 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 3148 ms
+2020-05-21 18:05:19 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-05-21 18:05:19 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-05-21 18:05:20 [restartedMain] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-05-21 18:05:20 [restartedMain] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-05-21 18:05:20 [restartedMain] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-05-21 18:05:20 [restartedMain] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-05-21 18:05:20 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-21 18:05:20 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler - Initializing ExecutorService
+2020-05-21 18:05:21 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-05-21 18:05:23 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 19 endpoint(s) beneath base path '/actuator'
+2020-05-21 18:05:23 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-05-21 18:05:23 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/mall-sys'
+2020-05-21 18:05:23 [restartedMain] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, mall-sys 192.168.1.111:8001 register finished
+2020-05-21 18:05:24 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - Started MallSysMainApplication in 14.791 seconds (JVM running for 17.99)
+2020-05-21 18:05:24 [RMI TCP Connection(1)-192.168.1.111] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-21 18:05:24 [RMI TCP Connection(1)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-05-21 18:05:24 [RMI TCP Connection(1)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 15 ms
+2020-05-21 18:05:26 [boundedElastic-1] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-05-21 18:05:26 [boundedElastic-1] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-05-21 18:05:28 [http-nio-8001-exec-1] INFO  org.apache.tomcat.util.http.parser.Cookie - A cookie header was received [1588132673] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-05-21 18:06:23 [SpringContextShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registering from Nacos Server now...
+2020-05-21 18:06:23 [SpringContextShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registration finished.
+2020-05-21 18:06:23 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-21 18:06:30 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-21 18:06:32 [restartedMain] INFO  c.a.cloud.nacos.client.NacosPropertySourceBuilder - Loading nacos data, dataId: 'mall-sys-dev.yaml', group: 'DEV_GROUP'
+2020-05-21 18:06:32 [restartedMain] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-mall-sys-dev.yaml'}, BootstrapPropertySource {name='bootstrapProperties-mall-sys.yaml'}]
+2020-05-21 18:06:32 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - The following profiles are active: dev
+2020-05-21 18:06:33 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:06:33 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:06:33 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-05-21 18:06:33 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-05-21 18:06:33 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12ms. Found 0 Redis repository interfaces.
+2020-05-21 18:06:33 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2020-05-21 18:06:33 [restartedMain] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=27542303-8b53-331a-9e36-9de7d2e951dc
+2020-05-21 18:06:34 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-05-21 18:06:34 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-05-21 18:06:34 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-05-21 18:06:34 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-05-21 18:06:34 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.29]
+2020-05-21 18:06:34 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring embedded WebApplicationContext
+2020-05-21 18:06:34 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2541 ms
+2020-05-21 18:06:36 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-05-21 18:06:36 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-05-21 18:06:37 [restartedMain] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-05-21 18:06:37 [restartedMain] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-05-21 18:06:37 [restartedMain] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-05-21 18:06:37 [restartedMain] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-05-21 18:06:37 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-21 18:06:37 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler - Initializing ExecutorService
+2020-05-21 18:06:38 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-05-21 18:06:40 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 19 endpoint(s) beneath base path '/actuator'
+2020-05-21 18:06:41 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-05-21 18:06:41 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/mall-sys'
+2020-05-21 18:06:41 [restartedMain] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, mall-sys 192.168.1.111:8001 register finished
+2020-05-21 18:06:42 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - Started MallSysMainApplication in 13.487 seconds (JVM running for 16.072)
+2020-05-21 18:06:42 [RMI TCP Connection(4)-192.168.1.111] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-21 18:06:42 [RMI TCP Connection(4)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-05-21 18:06:42 [RMI TCP Connection(4)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2020-05-21 18:06:43 [boundedElastic-1] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-05-21 18:06:43 [boundedElastic-1] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-05-21 18:06:58 [http-nio-8001-exec-1] INFO  org.apache.tomcat.util.http.parser.Cookie - A cookie header was received [1588132673] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-05-21 18:07:42 [SpringContextShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registering from Nacos Server now...
+2020-05-21 18:07:42 [SpringContextShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registration finished.
+2020-05-21 18:07:42 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-21 18:07:42 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2020-05-21 18:07:42 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

@@ -23,8 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <junit.vaersion>4.12</junit.vaersion>
-        <log4j.vaersion>1.2.17</log4j.vaersion>
+        <junit.version>4.12</junit.version>
+        <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
         <mysql.version>5.1.47</mysql.version>
         <druid.version>1.1.16</druid.version>
@@ -83,6 +83,7 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

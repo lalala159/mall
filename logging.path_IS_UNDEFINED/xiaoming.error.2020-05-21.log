@@ -19,3 +19,5 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 	at java.lang.Thread.run(Thread.java:745)
+2020-05-21 18:05:19 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+2020-05-21 18:06:36 [restartedMain] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
