@@ -10,6 +10,8 @@
         <module>mall-common</module>
         <module>mall-getway</module>
         <module>mall-security</module>
+        <module>mall-sys-8002</module>
+        <module>mall-order</module>
     </modules>
     <dependencies>
         <dependency>

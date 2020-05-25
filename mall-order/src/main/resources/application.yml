@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 129.211.182.117:8848
+  application:
+    name: mall-order
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource #当前数据源类型
+    driver-class-name: org.gjt.mm.mysql.Driver  #mysql驱动包
+    url: jdbc:mysql://localhost:3306/jkgl?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root

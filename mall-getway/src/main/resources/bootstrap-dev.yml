@@ -2,12 +2,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 39.106.4.104:8848
+        server-addr: 129.211.182.117:8848
       config:
-        server-addr: 39.106.4.104:8848
+        server-addr: 129.211.182.117:8848
         file-extension: yaml
         group: DEV_GROUP
-        namespace: 1b0ae7b8-2fb8-4eb8-a0f4-eb1dbffcc99a
+        namespace: 73062878-b3a4-4a28-a4fc-cc886cfb882d
 management:
   endpoints:
     web:
