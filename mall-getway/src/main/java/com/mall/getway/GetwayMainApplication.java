@@ -12,7 +12,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@RefreshScope
 public class GetwayMainApplication {
     public static void main(String[] args){
         SpringApplication.run(GetwayMainApplication.class, args);

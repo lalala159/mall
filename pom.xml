@@ -12,6 +12,7 @@
         <module>mall-security</module>
         <module>mall-sys-8002</module>
         <module>mall-order</module>
+        <module>mall-sentinel</module>
     </modules>
     <dependencies>
         <dependency>

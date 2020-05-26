@@ -2,6 +2,6 @@ server:
   port: 9527
 spring:
   application:
-    name: mall-getway
+    name: mall-gateway
   profiles:
     active: dev
