@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 129.211.182.117:8848
+      config:
+        server-addr: 129.211.182.117:8848
+        file-extension: yaml
+        group: DEV_GROUP
+        namespace: 73062878-b3a4-4a28-a4fc-cc886cfb882d
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

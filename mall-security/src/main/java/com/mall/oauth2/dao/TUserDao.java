@@ -1,8 +1,9 @@
 package com.mall.oauth2.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mall.oauth2.domain.TUser;
 
-public interface TUserDao {
+public interface TUserDao extends BaseMapper<TUser> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(TUser record);

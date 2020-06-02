@@ -1,13 +1,18 @@
 package com.mall.oauth2.domain;
 
 import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * t_user
  * @author 
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TUser implements Serializable {
     private Integer id;
 

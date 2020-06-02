@@ -1,0 +1,13 @@
+server:
+  port: 8401
+spring:
+  application:
+    name: mall-sentinel
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 129.211.182.117:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
