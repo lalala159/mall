@@ -1,8 +1,0 @@
-authorizationparam:
-  client-id: 123456 #客户端id
-  secret: 123456 #(可信客户端需要)客户端密钥
-  scopes: read,write #客户受限范围
-  authorized-grant-types: password #授权客户端使用的授权类型
-  token-expire: 10000 #token过期时间
-  token-refresh: 1500 #token刷新时间
-debug: true

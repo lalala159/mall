@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-        return new NoEncryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
+//        return new NoEncryptPasswordEncoder();
     }
 
     @Override
@@ -60,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    public static void main(String[] args){
-        System.out.println(new BCryptPasswordEncoder().encode("hc7777777"));
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        Boolean flag = bCryptPasswordEncoder.matches("hc7777777", "$2a$10$C3oqKb2tcmeksE6Md9sruumhdMAkYee0pTIuwtGpIZvrHTSlseDpW");
+        System.out.println(flag);
     }
 }

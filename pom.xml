@@ -9,7 +9,6 @@
         <module>mall-sys</module>
         <module>mall-common</module>
         <module>mall-getway</module>
-        <module>mall-security</module>
         <module>mall-sys-8002</module>
         <module>mall-order</module>
         <module>mall-sentinel</module>

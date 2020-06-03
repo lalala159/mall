@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -45,6 +46,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private MyUserDetailService userDetailService;
 
+    @Autowired
+    public PasswordEncoder passwordEncoder;
+
     @Bean
     public TokenStore tokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
@@ -68,9 +72,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 //        clients.withClientDetails(clientDetails());
         clients.inMemory()
-                .withClient("android")
+                .withClient("gateway")
                 .scopes("read")
-                .secret("android")
+                .secret(passwordEncoder.encode("123456"))
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .and()
                 .withClient("webapp")

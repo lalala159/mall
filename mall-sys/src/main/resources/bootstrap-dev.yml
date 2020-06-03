@@ -13,4 +13,10 @@ management:
     web:
       exposure:
         include: "*"
+security:
+  oauth2:
+    resource:
+      id: mall-sys
+      user-info-uri: http://localhost:9527/auth/api/member
+      prefer-token-info: false
 
