@@ -1,7 +1,11 @@
 package com.mall.auth.controller;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mall.auth.service.MemberService;
 import com.mall.auth.service.MyUserDetailService;
+import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
 import com.mall.common.enumeration.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * 〈会员Controller〉
@@ -18,11 +23,14 @@ import java.security.Principal;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sys/user")
 public class MemberController {
 
     @Autowired
     private MyUserDetailService userDetailService;
+
+    @Autowired
+    private MemberService memberService;
 
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
@@ -43,5 +51,12 @@ public class MemberController {
             result.setMessage("注销失败");
         }
         return result;
+    }
+
+    @PostMapping(value = "/queryList")
+    public PageInfo queryList(Integer pageNum, Integer pageSize, String memberName, String mobile) {
+        PageHelper.offsetPage(pageNum-1, pageSize);
+        List<Member> list = memberService.queryList(memberName, mobile);
+        return new PageInfo(list);
     }
 }
