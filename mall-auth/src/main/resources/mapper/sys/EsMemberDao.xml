@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.auth.dao.EsMemberDao">
-  <resultMap id="BaseResultMap" type="com.mall.auth.domain.EsMember">
+  <resultMap id="BaseResultMap" type="com.mall.common.domain.EsMember">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="sex" jdbcType="BOOLEAN" property="sex" />
@@ -12,7 +14,7 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, member_name, `password`, email, sex, mobile, birthday, createTime
+    id, user_name, member_name, store_id, `password`, email, sex, mobile, birthday, createTime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,19 +26,27 @@
     delete from es_member
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.auth.domain.EsMember" useGeneratedKeys="true">
-    insert into es_member (member_name, `password`, email, 
-      sex, mobile, birthday, 
-      createTime)
-    values (#{memberName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=BOOLEAN}, #{mobile,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
-      #{createtime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.EsMember" useGeneratedKeys="true">
+    insert into es_member (user_name, member_name, store_id, 
+      `password`, email, sex, 
+      mobile, birthday, createTime
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BOOLEAN}, 
+      #{mobile,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.auth.domain.EsMember" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.EsMember" useGeneratedKeys="true">
     insert into es_member
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
       <if test="memberName != null">
         member_name,
+      </if>
+      <if test="storeId != null">
+        store_id,
       </if>
       <if test="password != null">
         `password`,
@@ -58,8 +68,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="memberName != null">
         #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -81,11 +97,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mall.auth.domain.EsMember">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.common.domain.EsMember">
     update es_member
     <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="memberName != null">
         member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
@@ -108,9 +130,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mall.auth.domain.EsMember">
+  <update id="updateByPrimaryKey" parameterType="com.mall.common.domain.EsMember">
     update es_member
-    set member_name = #{memberName,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
       `password` = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=BOOLEAN},

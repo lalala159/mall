@@ -5,10 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.MemberService;
 import com.mall.auth.service.MyUserDetailService;
+import com.mall.common.domain.EsMember;
 import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
 import com.mall.common.enumeration.ResultCode;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +62,19 @@ public class MemberController {
         PageHelper.offsetPage(pageNum-1, pageSize);
         List<Member> list = memberService.queryList(memberName, mobile);
         return new PageInfo(list);
+    }
+
+    @PostMapping(value = "/addUser")
+    public Result queryList(EsMember esMember) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String password = bCryptPasswordEncoder.encode("fj88888888");
+        esMember.setPassword(password);
+        try {
+            memberService.insertSelective(esMember);
+        }catch (DuplicateKeyException e){
+            return new Result(888, "该账号已存在");
+        }
+
+        return new Result(200, "新增成功");
     }
 }

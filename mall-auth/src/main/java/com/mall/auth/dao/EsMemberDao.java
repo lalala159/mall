@@ -1,7 +1,10 @@
 package com.mall.auth.dao;
 
-import com.mall.auth.domain.EsMember;
 
+import com.mall.common.domain.EsMember;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public interface EsMemberDao {
     int deleteByPrimaryKey(Integer id);
 
