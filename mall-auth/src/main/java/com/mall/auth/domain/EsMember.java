@@ -21,6 +21,15 @@ public class EsMember implements Serializable {
     private String memberName;
 
     /**
+     * 账号
+     */
+    private String userName;
+
+    /**
+     * 门店编码
+     */
+    private Integer storeId;
+    /**
      * 密码
      */
     private String password;

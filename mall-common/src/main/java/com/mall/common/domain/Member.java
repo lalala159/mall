@@ -23,6 +23,8 @@ public class Member{
     private short sex;
     private Date birthday;
     private Date createTime;
+    private Integer storeId;
+    private String userName;
     private Set<Role> roles;
 
 }
