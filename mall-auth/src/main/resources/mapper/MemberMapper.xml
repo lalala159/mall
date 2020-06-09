@@ -25,13 +25,19 @@
         select * from es_member where user_name = #{memberName,jdbcType=VARCHAR}
     </select>
 
-    <select id="queryList" resultMap="baseResultMap">
-        select * from es_member where 1=1
+    <select id="queryList" resultType="com.mall.common.domain.Member">
+        select
+            a.id,a.member_name memberName,a.email,
+            a.mobile,a.sex,a.user_name userName,
+            a.store_id storeId,b.store_name storeName
+        from es_member a
+        left join mall_store b on a.store_id = b.id
+        where 1=1
         <if test="memberName != null and memberName != ''">
-            and member_name like concat('%', #{memberName}, '%')
+            and a.member_name like concat('%', #{memberName}, '%')
         </if>
         <if test="mobile != null and mobile != ''">
-            and mobile like concat('%', #{mobile}, '%')
+            and a.mobile like concat('%', #{mobile}, '%')
         </if>
     </select>
 

@@ -25,6 +25,7 @@ public class Member{
     private Date createTime;
     private Integer storeId;
     private String userName;
+    private String storeName;
     private Set<Role> roles;
 
 }
