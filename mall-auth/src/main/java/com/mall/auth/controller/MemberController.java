@@ -1,6 +1,7 @@
 package com.mall.auth.controller;
 
 
+import cn.hutool.core.date.DateTime;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.MemberService;
@@ -17,6 +18,8 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,6 +73,7 @@ public class MemberController {
         String password = bCryptPasswordEncoder.encode("fj88888888");
         esMember.setPassword(password);
         try {
+            esMember.setCreatetime(DateTime.now());
             memberService.insertSelective(esMember);
         }catch (DuplicateKeyException e){
             return new Result(888, "该账号已存在");
