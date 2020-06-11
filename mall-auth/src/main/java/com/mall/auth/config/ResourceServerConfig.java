@@ -9,11 +9,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 〈资源认证服务器〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
+ * @Author HC
+ * @Date 2020/6/5 15:22
+ * @Version 1.0
  */
 @Configuration
 @EnableResourceServer

@@ -155,4 +155,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="getUserInfo" resultMap="BaseResultMap">
+      select  distinct p.*
+      from es_member a
+               inner join es_member_role emr on a.id = emr.member_id
+               inner join es_role_permission erp on emr.role_id = erp.role_id
+               inner join es_permission p on erp.permission_id = p.id
+               where a.user_name = #{userName} order by p.ranks
+  </select>
+
 </mapper>

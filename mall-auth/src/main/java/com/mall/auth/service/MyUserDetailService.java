@@ -20,11 +20,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * 〈自定义UserDetailService〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
+ * @Author HC
+ * @Date 2020/6/5 15:22
+ * @Version 1.0
  */
 @Service("userDetailService")
 public class MyUserDetailService implements UserDetailsService {
@@ -50,14 +48,12 @@ public class MyUserDetailService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
-        Map<String, Object> router = new HashMap<>();
         for (Role role : member.getRoles()) {
             //角色必须是ROLE_开头，可以在数据库中设置
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
             grantedAuthorities.add(grantedAuthority);
             //获取权限
             for (EsPermission permission : role.getPermissions()) {
-                router.put("per"+permission.getId(), permission);
                 GrantedAuthority authority = new SimpleGrantedAuthority(permission.getUri());
                 grantedAuthorities.add(authority);
             }

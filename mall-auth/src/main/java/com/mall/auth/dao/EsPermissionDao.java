@@ -19,5 +19,7 @@ public interface EsPermissionDao {
 
     int updateByPrimaryKey(EsPermission record);
 
-    List<EsPermission> getPrentId(Integer parentId);
+    List<EsPermission> getUserInfo(String UserName);
+
+
 }
