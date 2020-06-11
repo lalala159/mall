@@ -1,5 +1,6 @@
 package com.mall.common.domain;
 
+import com.mall.common.domain.auth.EsPermission;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,5 +21,5 @@ public class Role {
     private short valid;
     private Date createTime;
     private Date updateTime;
-    private Set<Permission> permissions;
+    private Set<EsPermission> permissions;
 }

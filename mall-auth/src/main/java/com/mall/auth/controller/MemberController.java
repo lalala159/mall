@@ -68,7 +68,7 @@ public class MemberController {
     }
 
     @PostMapping(value = "/addUser")
-    public Result queryList(EsMember esMember) {
+    public Result addUser(EsMember esMember) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String password = bCryptPasswordEncoder.encode("fj88888888");
         esMember.setPassword(password);
@@ -80,5 +80,15 @@ public class MemberController {
         }
 
         return new Result(200, "新增成功");
+    }
+
+    @DeleteMapping(value = "/deleteUser")
+    public Result deleteUser(Integer id){
+        try{
+            memberService.deleteByPrimaryKey(id);
+        }catch (Exception e){
+            return new Result(200, "删除失败");
+        }
+        return new Result(200, "删除成功");
     }
 }

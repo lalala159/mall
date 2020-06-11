@@ -1,10 +1,12 @@
 package com.mall.auth.service;
 
 
+import com.mall.auth.dao.EsPermissionDao;
 import com.mall.auth.dao.MemberDao;
 import com.mall.common.domain.Member;
 import com.mall.common.domain.Permission;
 import com.mall.common.domain.Role;
+import com.mall.common.domain.auth.EsPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,8 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 〈自定义UserDetailService〉
@@ -49,12 +50,14 @@ public class MyUserDetailService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
+        Map<String, Object> router = new HashMap<>();
         for (Role role : member.getRoles()) {
             //角色必须是ROLE_开头，可以在数据库中设置
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
             grantedAuthorities.add(grantedAuthority);
             //获取权限
-            for (Permission permission : role.getPermissions()) {
+            for (EsPermission permission : role.getPermissions()) {
+                router.put("per"+permission.getId(), permission);
                 GrantedAuthority authority = new SimpleGrantedAuthority(permission.getUri());
                 grantedAuthorities.add(authority);
             }
