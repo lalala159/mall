@@ -6,6 +6,7 @@
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="method" jdbcType="VARCHAR" property="method" />
     <result column="zuul_prefix" jdbcType="VARCHAR" property="zuulPrefix" />
     <result column="service_prefix" jdbcType="VARCHAR" property="servicePrefix" />

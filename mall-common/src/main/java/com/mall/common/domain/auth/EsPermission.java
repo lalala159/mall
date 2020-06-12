@@ -32,6 +32,18 @@ public class EsPermission implements Serializable {
     private String url;
 
     /**
+     * 图标
+     */
+    private String icon;
+
+
+    /**
+     * 组件地址
+     */
+    private String component;
+
+
+    /**
      * 方法类型
      */
     private String method;
