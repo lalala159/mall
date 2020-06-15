@@ -75,5 +75,6 @@ public class EsPermission implements Serializable {
 
     private Integer ranks;
 
+
     private static final long serialVersionUID = 1L;
 }

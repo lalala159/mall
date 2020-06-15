@@ -21,5 +21,7 @@ public interface EsPermissionDao {
 
     List<EsPermission> getUserInfo(String UserName);
 
+    List<EsPermission> getMenuList();
+
 
 }

@@ -4,6 +4,7 @@ import com.mall.auth.dao.EsPermissionDao;
 import com.mall.auth.domain.Menu;
 import com.mall.auth.domain.RouterVO;
 import com.mall.common.domain.auth.EsPermission;
+import com.mall.common.domain.auth.MenuVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -47,9 +48,13 @@ public class EsPermissionService {
         return esPermissionDao.updateByPrimaryKey(record);
     }
 
-    @Cacheable
     public List<Menu> getUserInfo(String userName) {
-        List<EsPermission> list = esPermissionDao.getUserInfo(userName);
+        List<EsPermission> list;
+        if (userName.equals("fujian")) {
+            list = esPermissionDao.getMenuList();
+        } else {
+            list = esPermissionDao.getUserInfo(userName);
+        }
         List<Menu> menuVOList = new ArrayList<>();
         for (EsPermission esPermission : list) {
             if (esPermission != null && esPermission.getParentId() == 0) {
@@ -62,6 +67,45 @@ public class EsPermissionService {
                 menuVO.setChildren(this.getSubMenu(list, menuVO));
                 // 添加一级菜单数据
                 menuVOList.add(menuVO);
+            }
+        }
+        return menuVOList;
+    }
+
+    public List<MenuVO> getMenuList() {
+        List<EsPermission> list = esPermissionDao.getMenuList();
+        List<MenuVO> menuVOList = new ArrayList<>();
+        for (EsPermission esPermission : list) {
+            if (esPermission != null && esPermission.getParentId() == 0) {
+                MenuVO menuVO = new MenuVO();
+                menuVO.setId(esPermission.getId());
+                menuVO.setLabel(esPermission.getPermissionName());
+                menuVO.setChildren(this.getChild(list, menuVO));
+                // 添加一级菜单数据
+                menuVOList.add(menuVO);
+            }
+        }
+        return menuVOList;
+    }
+
+    /**
+     * 获取子菜单
+     *
+     * @param lists
+     * @param menuVO
+     * @return
+     */
+    private List<MenuVO> getChild(List<EsPermission> lists, MenuVO menuVO) {
+        List<MenuVO> menuVOList = new ArrayList<>();
+        for (EsPermission menu0 : lists) {
+            if (menuVO.getId().equals(menu0.getParentId())) {
+                MenuVO menuVO0 = new MenuVO();
+                menuVO0.setId(menu0.getId());
+                menuVO0.setLabel(menu0.getPermissionName());
+                menuVOList.add(menuVO0);
+                // 添加到集合
+                List<MenuVO> menuVOSet = this.getChild(lists, menuVO0);
+                menuVO0.setChildren(menuVOSet);
             }
         }
         return menuVOList;
@@ -118,5 +162,18 @@ public class EsPermissionService {
             }
         }
         return routerVOList;
+    }
+
+    /**
+     * @Description:新增菜单
+     * @return:
+     * @param:
+     */
+    public int addMenu(EsPermission esPermission) {
+        return esPermissionDao.insertSelective(esPermission);
+    }
+
+    public int deleMenu(Integer id) {
+        return esPermissionDao.deleteByPrimaryKey(id);
     }
 }

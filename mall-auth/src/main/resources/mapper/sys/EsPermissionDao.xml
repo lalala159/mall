@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.auth.dao.EsPermissionDao">
-  <resultMap id="BaseResultMap" type="com.mall.common.domain.auth.EsPermission">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="method" jdbcType="VARCHAR" property="method" />
-    <result column="zuul_prefix" jdbcType="VARCHAR" property="zuulPrefix" />
-    <result column="service_prefix" jdbcType="VARCHAR" property="servicePrefix" />
-    <result column="uri" jdbcType="VARCHAR" property="uri" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="ranks" jdbcType="INTEGER" property="ranks" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.mall.common.domain.auth.EsPermission">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="method" jdbcType="VARCHAR" property="method"/>
+        <result column="zuul_prefix" jdbcType="VARCHAR" property="zuulPrefix"/>
+        <result column="service_prefix" jdbcType="VARCHAR" property="servicePrefix"/>
+        <result column="uri" jdbcType="VARCHAR" property="uri"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime"/>
+        <result column="ranks" jdbcType="INTEGER" property="ranks"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, permission_name, parent_id, url, `method`, zuul_prefix, service_prefix, uri, 
     createTime, updateTime, ranks
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from es_permission
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from es_permission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from es_permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsPermission" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsPermission"
+            useGeneratedKeys="true">
     insert into es_permission (permission_name, parent_id, url, 
       `method`, zuul_prefix, service_prefix, 
       uri, createTime, updateTime
@@ -39,110 +40,120 @@
       #{uri,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsPermission" useGeneratedKeys="true">
-    insert into es_permission
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="permissionName != null">
-        permission_name,
-      </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="method != null">
-        `method`,
-      </if>
-      <if test="zuulPrefix != null">
-        zuul_prefix,
-      </if>
-      <if test="servicePrefix != null">
-        service_prefix,
-      </if>
-      <if test="uri != null">
-        uri,
-      </if>
-      <if test="createtime != null">
-        createTime,
-      </if>
-      <if test="updatetime != null">
-        updateTime,
-      </if>
-      <if test="ranks != null">
-        ranks,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="permissionName != null">
-        #{permissionName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="method != null">
-        #{method,jdbcType=VARCHAR},
-      </if>
-      <if test="zuulPrefix != null">
-        #{zuulPrefix,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePrefix != null">
-        #{servicePrefix,jdbcType=VARCHAR},
-      </if>
-      <if test="uri != null">
-        #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ranks != null">
-        #{ranks,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mall.common.domain.auth.EsPermission">
-    update es_permission
-    <set>
-      <if test="permissionName != null">
-        permission_name = #{permissionName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="method != null">
-        `method` = #{method,jdbcType=VARCHAR},
-      </if>
-      <if test="zuulPrefix != null">
-        zuul_prefix = #{zuulPrefix,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePrefix != null">
-        service_prefix = #{servicePrefix,jdbcType=VARCHAR},
-      </if>
-      <if test="uri != null">
-        uri = #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null">
-        updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ranks != null">
-        #{ranks,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mall.common.domain.auth.EsPermission">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.mall.common.domain.auth.EsPermission" useGeneratedKeys="true">
+        insert into es_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionName != null">
+                permission_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="method != null">
+                `method`,
+            </if>
+            <if test="zuulPrefix != null">
+                zuul_prefix,
+            </if>
+            <if test="servicePrefix != null">
+                service_prefix,
+            </if>
+            <if test="uri != null">
+                uri,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+            <if test="ranks != null">
+                ranks,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="permissionName != null">
+                #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="zuulPrefix != null">
+                #{zuulPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePrefix != null">
+                #{servicePrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="uri != null">
+                #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ranks != null">
+                #{ranks,jdbcType=TIMESTAMP},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.common.domain.auth.EsPermission">
+        update es_permission
+        <set>
+            <if test="permissionName != null">
+                permission_name = #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                `method` = #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="zuulPrefix != null">
+                zuul_prefix = #{zuulPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePrefix != null">
+                service_prefix = #{servicePrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="uri != null">
+                uri = #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                updateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ranks != null">
+                #{ranks,jdbcType=TIMESTAMP},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.common.domain.auth.EsPermission">
     update es_permission
     set permission_name = #{permissionName,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},
@@ -156,13 +167,20 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getUserInfo" resultMap="BaseResultMap">
+    <select id="getUserInfo" resultMap="BaseResultMap">
       select  distinct p.*
       from es_member a
                inner join es_member_role emr on a.id = emr.member_id
                inner join es_role_permission erp on emr.role_id = erp.role_id
                inner join es_permission p on erp.permission_id = p.id
-               where a.user_name = #{userName} order by p.ranks
+               where
+                1=1
+                  and a.user_name = #{userName}
+                order by p.ranks
+  </select>
+
+  <select id="getMenuList" resultMap="BaseResultMap">
+    select * from es_permission order by ranks
   </select>
 
 </mapper>
