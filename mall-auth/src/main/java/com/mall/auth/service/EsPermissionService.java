@@ -50,11 +50,9 @@ public class EsPermissionService {
     @Cacheable
     public List<Menu> getUserInfo(String userName) {
         List<EsPermission> list = esPermissionDao.getUserInfo(userName);
-        List<Map<String, Object>> listMap = new ArrayList<>();
         List<Menu> menuVOList = new ArrayList<>();
         for (EsPermission esPermission : list) {
             if (esPermission != null && esPermission.getParentId() == 0) {
-                Map<String, Object> map = new HashMap<>();
                 Menu menuVO = new Menu();
                 menuVO.setId(esPermission.getId());
                 menuVO.setKey(esPermission.getId().toString());
@@ -76,8 +74,8 @@ public class EsPermissionService {
      * @param menuVO
      * @return
      */
-    private Set<Menu> getSubMenu(List<EsPermission> lists, Menu menuVO) {
-        Set<Menu> menuVOList = new HashSet<>();
+    private List<Menu> getSubMenu(List<EsPermission> lists, Menu menuVO) {
+        List<Menu> menuVOList = new ArrayList<>();
         for (EsPermission menu0 : lists) {
             if (menuVO.getId().equals(menu0.getParentId())) {
                 Menu menuVO0 = new Menu();
@@ -88,7 +86,7 @@ public class EsPermissionService {
                 menuVO0.setTitle(menu0.getPermissionName());
                 menuVOList.add(menuVO0);
                 // 添加到集合
-                Set<Menu> menuVOSet = this.getSubMenu(lists, menuVO0);
+                List<Menu> menuVOSet = this.getSubMenu(lists, menuVO0);
                 menuVO0.setChildren(menuVOSet);
             }
         }

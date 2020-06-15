@@ -2,6 +2,8 @@ package com.mall.auth.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,12 +12,12 @@ import java.util.Set;
  * @Version 1.0
  */
 @Data
-public class Menu {
+public class Menu implements Serializable {
     private Integer id;
     private String title;
     private String icon;
     private String key;
     private String path;
-    private Set<Menu> children;
+    private List<Menu> children;
 }
 
