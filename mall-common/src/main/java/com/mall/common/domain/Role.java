@@ -21,5 +21,6 @@ public class Role {
     private short valid;
     private Date createTime;
     private Date updateTime;
+    private String roleCode;
     private Set<EsPermission> permissions;
 }

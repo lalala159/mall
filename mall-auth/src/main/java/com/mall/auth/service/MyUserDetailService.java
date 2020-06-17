@@ -50,7 +50,7 @@ public class MyUserDetailService implements UserDetailsService {
         boolean accountNonLocked = true;
         for (Role role : member.getRoles()) {
             //角色必须是ROLE_开头，可以在数据库中设置
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleCode());
             grantedAuthorities.add(grantedAuthority);
             //获取权限
             for (EsPermission permission : role.getPermissions()) {

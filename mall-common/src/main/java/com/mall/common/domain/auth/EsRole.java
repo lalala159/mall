@@ -21,6 +21,11 @@ public class EsRole implements Serializable {
     private String roleName;
 
     /**
+     * 角色编码
+     */
+    private String roleCode;
+
+    /**
      * 是否有效 1是 0否
      */
     private Boolean valid;

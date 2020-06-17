@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mall.common.domain.auth.EsRole">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
     <result column="valid" jdbcType="BOOLEAN" property="valid" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
@@ -86,6 +87,6 @@
   </update>
 
   <select id="queryList" resultMap="BaseResultMap">
-    select * from es_role where `valid` = 1
+    select * from es_role
   </select>
 </mapper>

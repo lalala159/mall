@@ -5,6 +5,7 @@
     <resultMap id="baseResultMap" type="com.mall.common.domain.Role">
         <id property="id" column="id" jdbcType="INTEGER" />
         <result property="roleName" column="role_name" jdbcType="VARCHAR" />
+        <result property="roleCode" column="role_code" jdbcType="VARCHAR" />
         <result property="valid" column="valid" jdbcType="TINYINT" />
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP" />
         <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP" />
