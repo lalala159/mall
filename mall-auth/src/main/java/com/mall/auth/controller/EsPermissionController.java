@@ -40,8 +40,8 @@ public class EsPermissionController {
     }
 
     @GetMapping(value = "/getMenu")
-    public Result getMenu(){
-        List<MenuVO> menuList = esPermissionService.getMenuList();
+    public Result getMenu(String userName){
+        List<MenuVO> menuList = esPermissionService.getMenuList(userName);
         return new Result(200, "查询成功", menuList);
     }
 

@@ -2,6 +2,7 @@ package com.mall.auth.service;
 
 import com.mall.auth.dao.EsRoleDao;
 import com.mall.common.domain.auth.EsRole;
+import com.mall.common.domain.auth.RolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,21 @@ public class EsRoleService {
 
     public List<EsRole> queryList(){
         return esRoleDao.queryList();
+    }
+
+    public int addMenu(Integer roleId, String[] menuIds){
+        /*先清空权限*/
+        esRoleDao.deleMenu(roleId);
+        int flag = 0;
+        /*新增权限*/
+        for (String menuId : menuIds) {
+            RolePermission rolePermission = new RolePermission();
+            rolePermission.setRoleId(roleId);
+            rolePermission.setPermissionId(Integer.parseInt(menuId));
+            esRoleDao.addMenu(rolePermission);
+            flag++;
+        }
+        return flag;
     }
 
 

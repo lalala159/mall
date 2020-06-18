@@ -72,8 +72,13 @@ public class EsPermissionService {
         return menuVOList;
     }
 
-    public List<MenuVO> getMenuList() {
-        List<EsPermission> list = esPermissionDao.getMenuList();
+    public List<MenuVO> getMenuList(String userName) {
+        List<EsPermission> list;
+        if (userName.equals("fujian")) {
+            list = esPermissionDao.getMenuList();
+        } else {
+            list = esPermissionDao.getUserInfo(userName);
+        }
         List<MenuVO> menuVOList = new ArrayList<>();
         for (EsPermission esPermission : list) {
             if (esPermission != null && esPermission.getParentId() == 0) {

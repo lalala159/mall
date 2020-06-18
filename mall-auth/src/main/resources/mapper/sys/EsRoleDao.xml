@@ -89,4 +89,34 @@
   <select id="queryList" resultMap="BaseResultMap">
     select * from es_role
   </select>
+
+  <insert id="addMenu">
+    insert into es_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleMenu">
+    delete from es_role_permission where role_id = #{roleId}
+  </delete>
 </mapper>

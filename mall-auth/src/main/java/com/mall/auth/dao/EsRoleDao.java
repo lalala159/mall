@@ -1,6 +1,7 @@
 package com.mall.auth.dao;
 
 import com.mall.common.domain.auth.EsRole;
+import com.mall.common.domain.auth.RolePermission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface EsRoleDao {
     int updateByPrimaryKey(EsRole record);
 
     List<EsRole> queryList();
+
+    int addMenu(RolePermission rolePermission);
+
+    int deleMenu(Integer roleId);
 }
