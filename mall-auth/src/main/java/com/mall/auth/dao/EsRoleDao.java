@@ -3,6 +3,7 @@ package com.mall.auth.dao;
 import com.mall.common.domain.auth.EsRole;
 import com.mall.common.domain.auth.RolePermission;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,7 @@ public interface EsRoleDao {
     int addMenu(RolePermission rolePermission);
 
     int deleMenu(Integer roleId);
+
+
+    List<Integer> getPermissioned(@Param(value = "roleId") Integer roleId);
 }

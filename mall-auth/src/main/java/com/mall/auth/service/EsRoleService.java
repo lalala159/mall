@@ -3,9 +3,11 @@ package com.mall.auth.service;
 import com.mall.auth.dao.EsRoleDao;
 import com.mall.common.domain.auth.EsRole;
 import com.mall.common.domain.auth.RolePermission;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,13 +46,20 @@ public class EsRoleService {
         int flag = 0;
         /*新增权限*/
         for (String menuId : menuIds) {
-            RolePermission rolePermission = new RolePermission();
-            rolePermission.setRoleId(roleId);
-            rolePermission.setPermissionId(Integer.parseInt(menuId));
-            esRoleDao.addMenu(rolePermission);
-            flag++;
+            if(StringUtils.isNotEmpty(menuId)){
+                RolePermission rolePermission = new RolePermission();
+                rolePermission.setRoleId(roleId);
+                rolePermission.setPermissionId(Integer.parseInt(menuId));
+                esRoleDao.addMenu(rolePermission);
+                flag++;
+            }
         }
         return flag;
+    }
+
+    public List<Integer> getPermissioned(Integer roleId){
+        List<Integer> list = esRoleDao.getPermissioned(roleId);
+        return list;
     }
 
 

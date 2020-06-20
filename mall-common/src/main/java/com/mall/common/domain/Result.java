@@ -23,4 +23,24 @@ public class Result {
     public Result(Integer code, String message) {
         this(code, message, null);
     }
+
+    public Result(Integer code, Object data) {
+        this(code, null, data);
+    }
+
+    public static Result success(String message){
+        return new Result(200, message);
+    }
+
+    public static Result success(Object data){
+        return new Result(200, data);
+    }
+
+    public static Result fail(String message){
+        return new Result(500, message);
+    }
+
+    public static Result fail(Object data){
+        return new Result(500, data);
+    }
 }
