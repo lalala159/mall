@@ -139,4 +139,11 @@
         </if>
         and p.parent_id != 0
     </select>
+
+    <select id="getRole" resultMap="BaseResultMap">
+        select c.* from es_member a
+        inner join es_member_role b on a.id = b.member_id
+        inner join es_role c on b.role_id = c.id
+        where a.user_name = #{userName}
+    </select>
 </mapper>

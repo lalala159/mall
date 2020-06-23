@@ -16,5 +16,9 @@
       select r.* from es_member_role mr,es_role r where mr.role_id = r.id and mr.member_id = #{memberId,jdbcType=INTEGER}
     </select>
 
+    <select id="">
+        s
+    </select>
+
 
 </mapper>

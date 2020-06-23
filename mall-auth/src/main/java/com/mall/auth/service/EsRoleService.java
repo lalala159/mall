@@ -3,7 +3,9 @@ package com.mall.auth.service;
 import com.mall.auth.dao.EsRoleDao;
 import com.mall.common.domain.auth.EsRole;
 import com.mall.common.domain.auth.RolePermission;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
+@Slf4j
 public class EsRoleService {
     @Autowired
     private EsRoleDao esRoleDao;
@@ -60,6 +63,16 @@ public class EsRoleService {
     public List<Integer> getPermissioned(Integer roleId){
         List<Integer> list = esRoleDao.getPermissioned(roleId);
         return list;
+    }
+
+    public List<EsRole> getRole(String userName){
+        try{
+            List<EsRole> list = esRoleDao.getRole(userName);
+            return list;
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return null;
+        }
     }
 
 

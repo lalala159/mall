@@ -75,4 +75,10 @@ public class EsRoleController {
         }
         return Result.fail("");
     }
+
+    @GetMapping(value = "/getRole")
+    public Result getRole(String userName){
+        List<EsRole> list = esRoleService.getRole(userName);
+        return Result.success(list);
+    }
 }

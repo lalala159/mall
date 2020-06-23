@@ -29,4 +29,6 @@ public interface EsRoleDao {
 
 
     List<Integer> getPermissioned(@Param(value = "roleId") Integer roleId);
+
+    List<EsRole> getRole(@Param(value = "userName") String userName);
 }
