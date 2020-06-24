@@ -14,7 +14,7 @@ public class EsPermission implements Serializable {
     /**
      * 权限id
      */
-    private Integer id;
+    private String id;
 
     /**
      * 资源名称
@@ -24,7 +24,7 @@ public class EsPermission implements Serializable {
     /**
      * 上级编码
      */
-    private Integer parentId;
+    private String parentId;
 
     /**
      * 路由

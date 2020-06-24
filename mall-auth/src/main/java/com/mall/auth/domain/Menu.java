@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Data
 public class Menu implements Serializable {
-    private Integer id;
+    private String id;
     private String title;
     private String icon;
     private String key;

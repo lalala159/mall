@@ -13,7 +13,7 @@ public class EsRole implements Serializable {
     /**
      * 角色id
      */
-    private Integer id;
+    private String id;
 
     /**
      * 角色名称

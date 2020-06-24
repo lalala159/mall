@@ -7,13 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface EsPermissionDao {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(EsPermission record);
 
     int insertSelective(EsPermission record);
 
-    EsPermission selectByPrimaryKey(Integer id);
+    EsPermission selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(EsPermission record);
 

@@ -9,13 +9,13 @@ import java.util.List;
 
 @Mapper
 public interface EsRoleDao {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(EsRole record);
 
     int insertSelective(EsRole record);
 
-    EsRole selectByPrimaryKey(Integer id);
+    EsRole selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(EsRole record);
 
@@ -25,10 +25,14 @@ public interface EsRoleDao {
 
     int addMenu(RolePermission rolePermission);
 
-    int deleMenu(Integer roleId);
+    int deleMenu(String roleId);
 
 
-    List<Integer> getPermissioned(@Param(value = "roleId") Integer roleId);
+    List<Integer> getPermissioned(@Param(value = "roleId") String roleId);
 
     List<EsRole> getRole(@Param(value = "userName") String userName);
+
+    List<EsRole> getAllRole();
+
+    List<Integer> getPermissionIds(@Param(value = "roleIds") String roleIds);
 }

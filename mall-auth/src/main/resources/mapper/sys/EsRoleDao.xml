@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.auth.dao.EsRoleDao">
     <resultMap id="BaseResultMap" type="com.mall.common.domain.auth.EsRole">
-        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
         <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
         <result column="valid" jdbcType="BOOLEAN" property="valid"/>
@@ -12,27 +12,30 @@
     <sql id="Base_Column_List">
     id, role_name, `valid`, createTime, updateTime
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from es_role
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="string">
     delete from es_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsRole"
-            useGeneratedKeys="true">
+    <insert id="insert"   parameterType="com.mall.common.domain.auth.EsRole"
+            >
     insert into es_role (role_name, `valid`, createTime, 
       updateTime)
     values (#{roleName,jdbcType=VARCHAR}, #{valid,jdbcType=BOOLEAN}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsRole"
-            useGeneratedKeys="true">
+    <insert id="insertSelective"   parameterType="com.mall.common.domain.auth.EsRole"
+            >
         insert into es_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
             <if test="roleName != null">
                 role_name,
             </if>
@@ -50,6 +53,9 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
             <if test="roleName != null">
                 #{roleName,jdbcType=VARCHAR},
             </if>
@@ -83,7 +89,7 @@
                 updateTime = #{updatetime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mall.common.domain.auth.EsRole">
     update es_role
@@ -91,7 +97,7 @@
       `valid` = #{valid,jdbcType=BOOLEAN},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 
     <select id="queryList" resultMap="BaseResultMap">
@@ -116,10 +122,10 @@
                 #{id,jdbcType=INTEGER},
             </if>
             <if test="roleId != null">
-                #{roleId,jdbcType=INTEGER},
+                #{roleId,jdbcType=VARCHAR},
             </if>
             <if test="permissionId != null">
-                #{permissionId,jdbcType=INTEGER},
+                #{permissionId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -128,22 +134,36 @@
     delete from es_role_permission where role_id = #{roleId}
   </delete>
 
-    <select id="getPermissioned" resultType="Integer">
+    <select id="getPermissioned" resultType="string">
         select distinct p.id
         from es_role_permission erp
         inner join es_permission p on erp.permission_id = p.id
         where
         1=1
         <if test="roleId != null and roleId != ''">
-            and erp.role_id = #{roleId,jdbcType=INTEGER}
+            and erp.role_id = #{roleId,jdbcType=VARCHAR}
         </if>
         and p.parent_id != 0
     </select>
 
     <select id="getRole" resultMap="BaseResultMap">
-        select c.* from es_member a
+        select distinct c.* from es_member a
         inner join es_member_role b on a.id = b.member_id
         inner join es_role c on b.role_id = c.id
-        where a.user_name = #{userName}
+        where 1=1
+        <if test="userName!=null and userName != ''">
+            and a.user_name = #{userName}
+        </if>
+        and c.valid = 1
+    </select>
+
+    <select id="getAllRole" resultMap="BaseResultMap">
+        select * from es_role
+        where 1=1
+        and valid = 1
+    </select>
+
+    <select id="getPermissionIds" resultType="string">
+        select DISTINCT permission_id from es_role_permission where role_id in (${roleIds})
     </select>
 </mapper>

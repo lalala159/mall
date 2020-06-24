@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class Permission {
 
-    private int id;
+    private String id;
     private String zuulPrefix;
     private String servicePrefix;
     private String method;

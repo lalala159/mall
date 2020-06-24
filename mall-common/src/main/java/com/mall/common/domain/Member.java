@@ -15,7 +15,7 @@ import java.util.Set;
 @Data
 public class Member{
 
-    private int id;
+    private String id;
     private String memberName;
     private String password;
     private String mobile;

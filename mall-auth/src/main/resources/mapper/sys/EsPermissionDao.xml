@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.auth.dao.EsPermissionDao">
     <resultMap id="BaseResultMap" type="com.mall.common.domain.auth.EsPermission">
-        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -19,18 +19,17 @@
     id, permission_name, parent_id, url, `method`, zuul_prefix, service_prefix, uri, 
     createTime, updateTime, ranks
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from es_permission
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="string">
     delete from es_permission
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.common.domain.auth.EsPermission"
-            useGeneratedKeys="true">
+    <insert id="insert"   parameterType="com.mall.common.domain.auth.EsPermission">
     insert into es_permission (permission_name, parent_id, url, 
       `method`, zuul_prefix, service_prefix, 
       uri, createTime, updateTime
@@ -40,10 +39,13 @@
       #{uri,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id"
-            parameterType="com.mall.common.domain.auth.EsPermission" useGeneratedKeys="true">
+    <insert id="insertSelective"
+            parameterType="com.mall.common.domain.auth.EsPermission" >
         insert into es_permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
             <if test="permissionName != null">
                 permission_name,
             </if>
@@ -79,6 +81,9 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
             <if test="permissionName != null">
                 #{permissionName,jdbcType=VARCHAR},
             </if>
@@ -151,7 +156,7 @@
                 #{icon,jdbcType=VARCHAR},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mall.common.domain.auth.EsPermission">
     update es_permission

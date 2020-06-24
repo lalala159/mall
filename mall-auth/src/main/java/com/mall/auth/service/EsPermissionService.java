@@ -7,6 +7,7 @@ import com.mall.common.domain.auth.EsPermission;
 import com.mall.common.domain.auth.MenuVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,10 @@ public class EsPermissionService {
     @Autowired
     private EsPermissionDao esPermissionDao;
 
-    public int deleteByPrimaryKey(Integer id) {
+    @Value("${admin.name}")
+    private String admin;
+
+    public int deleteByPrimaryKey(String id) {
         return esPermissionDao.deleteByPrimaryKey(id);
     }
 
@@ -36,7 +40,7 @@ public class EsPermissionService {
         return esPermissionDao.insertSelective(record);
     }
 
-    public EsPermission selectByPrimaryKey(Integer id) {
+    public EsPermission selectByPrimaryKey(String id) {
         return esPermissionDao.selectByPrimaryKey(id);
     }
 
@@ -50,14 +54,14 @@ public class EsPermissionService {
 
     public List<Menu> getUserInfo(String userName) {
         List<EsPermission> list;
-        if (userName.equals("fujian")) {
+        if (userName.equals(admin)) {
             list = esPermissionDao.getMenuList();
         } else {
             list = esPermissionDao.getUserInfo(userName);
         }
         List<Menu> menuVOList = new ArrayList<>();
         for (EsPermission esPermission : list) {
-            if (esPermission != null && esPermission.getParentId() == 0) {
+            if (esPermission != null && esPermission.getParentId().equals("0")) {
                 Menu menuVO = new Menu();
                 menuVO.setId(esPermission.getId());
                 menuVO.setKey(esPermission.getId().toString());
@@ -74,14 +78,14 @@ public class EsPermissionService {
 
     public List<MenuVO> getMenuList(String userName) {
         List<EsPermission> list;
-        if (userName.equals("fujian")) {
+        if (userName.equals(admin)) {
             list = esPermissionDao.getMenuList();
         } else {
             list = esPermissionDao.getUserInfo(userName);
         }
         List<MenuVO> menuVOList = new ArrayList<>();
         for (EsPermission esPermission : list) {
-            if (esPermission != null && esPermission.getParentId() == 0) {
+            if (esPermission != null && esPermission.getParentId().equals("0")) {
                 MenuVO menuVO = new MenuVO();
                 menuVO.setId(esPermission.getId());
                 menuVO.setLabel(esPermission.getPermissionName());
@@ -178,7 +182,7 @@ public class EsPermissionService {
         return esPermissionDao.insertSelective(esPermission);
     }
 
-    public int deleMenu(Integer id) {
+    public int deleMenu(String id) {
         return esPermissionDao.deleteByPrimaryKey(id);
     }
 }

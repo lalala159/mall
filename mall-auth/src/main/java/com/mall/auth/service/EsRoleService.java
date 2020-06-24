@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,10 @@ public class EsRoleService {
     @Autowired
     private EsRoleDao esRoleDao;
 
-    public int deleteByPrimaryKey(Integer id){
+    @Value("${admin.name}")
+    private String admin;
+
+    public int deleteByPrimaryKey(String id){
         return esRoleDao.deleteByPrimaryKey(id);
     }
 
@@ -31,7 +35,7 @@ public class EsRoleService {
         return esRoleDao.insertSelective(record);
     }
 
-    public EsRole selectByPrimaryKey(Integer id){
+    public EsRole selectByPrimaryKey(String id){
         return esRoleDao.selectByPrimaryKey(id);
     }
 
@@ -43,7 +47,7 @@ public class EsRoleService {
         return esRoleDao.queryList();
     }
 
-    public int addMenu(Integer roleId, String[] menuIds){
+    public int addMenu(String roleId, String[] menuIds){
         /*先清空权限*/
         esRoleDao.deleMenu(roleId);
         int flag = 0;
@@ -52,7 +56,7 @@ public class EsRoleService {
             if(StringUtils.isNotEmpty(menuId)){
                 RolePermission rolePermission = new RolePermission();
                 rolePermission.setRoleId(roleId);
-                rolePermission.setPermissionId(Integer.parseInt(menuId));
+                rolePermission.setPermissionId(menuId);
                 esRoleDao.addMenu(rolePermission);
                 flag++;
             }
@@ -60,15 +64,32 @@ public class EsRoleService {
         return flag;
     }
 
-    public List<Integer> getPermissioned(Integer roleId){
+    public List<Integer> getPermissioned(String roleId){
         List<Integer> list = esRoleDao.getPermissioned(roleId);
         return list;
     }
 
     public List<EsRole> getRole(String userName){
         try{
-            List<EsRole> list = esRoleDao.getRole(userName);
+            List<EsRole> list;
+            if(userName.equals(admin)){
+                list = esRoleDao.getAllRole();
+            }else{
+                list = esRoleDao.getRole(userName);
+            }
             return list;
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Integer> getPermissionIds(String roleIds){
+        try{
+            if(StringUtils.isNotEmpty(roleIds)){
+                return esRoleDao.getPermissionIds(roleIds);
+            }
+            return null;
         }catch (Exception e){
             log.error(e.getMessage());
             return null;

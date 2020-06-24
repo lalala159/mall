@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class MenuVO {
-    private Integer id;
+    private String id;
     private String label;
     List<MenuVO> children;
 }

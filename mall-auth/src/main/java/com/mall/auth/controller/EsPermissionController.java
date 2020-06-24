@@ -4,6 +4,7 @@ package com.mall.auth.controller;
 import com.mall.auth.domain.Menu;
 import com.mall.auth.domain.RouterVO;
 import com.mall.auth.service.EsPermissionService;
+import com.mall.auth.util.UUIDUtil;
 import com.mall.common.domain.Result;
 import com.mall.common.domain.auth.EsPermission;
 import com.mall.common.domain.auth.MenuVO;
@@ -49,12 +50,13 @@ public class EsPermissionController {
     public Result addMenu(EsPermission esPermission){
         esPermission.setUri("exit");
         esPermission.setCreatetime(new Date());
+        esPermission.setId(UUIDUtil.getId());
         esPermissionService.addMenu(esPermission);
         return new Result(200, "新增成功");
     }
 
     @DeleteMapping(value = "/deleteMenu")
-    public Result deleteMenu(Integer id){
+    public Result deleteMenu(String id){
         esPermissionService.deleteByPrimaryKey(id);
         return new Result(200, "删除成功");
     }

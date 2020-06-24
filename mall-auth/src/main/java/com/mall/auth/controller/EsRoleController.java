@@ -3,6 +3,7 @@ package com.mall.auth.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.EsRoleService;
+import com.mall.auth.util.UUIDUtil;
 import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
 import com.mall.common.domain.auth.EsRole;
@@ -31,14 +32,14 @@ public class EsRoleController {
     }
 
     @PostMapping(value = "/addMenu")
-    public Result addMenu(Integer roleId, String menuIds) {
+    public Result addMenu(String roleId, String menuIds) {
         String[] menus = menuIds.split(",");
         int flag = esRoleService.addMenu(roleId, menus);
         return new Result(200, "设置成功");
     }
 
     @GetMapping(value = "/getPermissioned")
-    public Result getPermissioned(Integer roleId) {
+    public Result getPermissioned(String roleId) {
         List<Integer> list;
         if(roleId == null){
             list = null;
@@ -52,6 +53,7 @@ public class EsRoleController {
     public Result addRole(EsRole esRole) {
         try{
             esRole.setValid(true);
+            esRole.setId(UUIDUtil.getId());
             esRole.setCreatetime(new Date());
             int flag = esRoleService.insertSelective(esRole);
             if(flag>0){
@@ -64,7 +66,7 @@ public class EsRoleController {
     }
 
     @DeleteMapping(value = "/deleteRole")
-    public Result deleteMenu(Integer id){
+    public Result deleteMenu(String id){
         try{
             int flag = esRoleService.deleteByPrimaryKey(id);
             if(flag>0){
@@ -79,6 +81,12 @@ public class EsRoleController {
     @GetMapping(value = "/getRole")
     public Result getRole(String userName){
         List<EsRole> list = esRoleService.getRole(userName);
+        return Result.success(list);
+    }
+
+    @GetMapping(value = "/getPermissionIds")
+    public Result getPermissionIds(String roleIds){
+        List<Integer> list = esRoleService.getPermissionIds(roleIds);
         return Result.success(list);
     }
 }

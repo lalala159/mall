@@ -4,6 +4,8 @@ import com.mall.auth.dao.EsMemberDao;
 import com.mall.auth.dao.MemberDao;
 import com.mall.common.domain.EsMember;
 import com.mall.common.domain.Member;
+import com.mall.common.domain.auth.UserRole;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
+@Slf4j
 public class MemberService {
 
     @Autowired
@@ -23,7 +26,7 @@ public class MemberService {
     @Autowired
     private MemberDao esmemberDao;
 
-    public int deleteByPrimaryKey(Integer id){
+    public int deleteByPrimaryKey(String id){
         return memberDao.deleteByPrimaryKey(id);
     }
 
@@ -35,7 +38,7 @@ public class MemberService {
         return memberDao.insertSelective(record);
     }
 
-    public EsMember selectByPrimaryKey(Integer id){
+    public EsMember selectByPrimaryKey(String id){
         return memberDao.selectByPrimaryKey(id);
     }
 
@@ -49,5 +52,14 @@ public class MemberService {
 
     public List<Member> queryList(String memberName, String mobile){
         return esmemberDao.queryList(memberName, mobile);
+    }
+
+    public int addRole(UserRole userRole){
+        try{
+            return memberDao.addRole(userRole);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return 0;
+        }
     }
 }

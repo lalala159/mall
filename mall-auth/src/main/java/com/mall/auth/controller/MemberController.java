@@ -6,12 +6,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.MemberService;
 import com.mall.auth.service.MyUserDetailService;
+import com.mall.auth.util.UUIDUtil;
 import com.mall.common.domain.EsMember;
 import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
+import com.mall.common.domain.auth.UserRole;
 import com.mall.common.enumeration.ResultCode;
 import com.sun.org.apache.regexp.internal.RE;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
@@ -31,6 +35,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
+@Slf4j
 public class MemberController {
 
     @Autowired
@@ -68,13 +73,22 @@ public class MemberController {
     }
 
     @PostMapping(value = "/addUser")
-    public Result addUser(EsMember esMember) {
+    public Result addUser(EsMember esMember, String roleIds) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String password = bCryptPasswordEncoder.encode("fj88888888");
+        String memberId = UUIDUtil.getId();
+        esMember.setId(memberId);
         esMember.setPassword(password);
+        String[] roleId = roleIds.split(",");
         try {
             esMember.setCreatetime(DateTime.now());
             memberService.insertSelective(esMember);
+            for (String s : roleId) {
+                UserRole userRole = new UserRole();
+                userRole.setMemberId(memberId);
+                userRole.setRoleId(s);
+                memberService.addRole(userRole);
+            }
         }catch (DuplicateKeyException e){
             return new Result(888, "该账号已存在");
         }
@@ -83,7 +97,7 @@ public class MemberController {
     }
 
     @DeleteMapping(value = "/deleteUser")
-    public Result deleteUser(Integer id){
+    public Result deleteUser(String id){
         try{
             memberService.deleteByPrimaryKey(id);
         }catch (Exception e){

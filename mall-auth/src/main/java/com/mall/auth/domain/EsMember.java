@@ -13,7 +13,7 @@ public class EsMember implements Serializable {
     /**
      * 会员id
      */
-    private Integer id;
+    private String id;
 
     /**
      * 会员名
