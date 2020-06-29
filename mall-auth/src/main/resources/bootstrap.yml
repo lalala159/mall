@@ -1,4 +1,4 @@
-server:
+90server:
   port: 9001
 spring:
   application:

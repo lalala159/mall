@@ -12,18 +12,14 @@ import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
 import com.mall.common.domain.auth.UserRole;
 import com.mall.common.enumeration.ResultCode;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
