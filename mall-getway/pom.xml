@@ -53,6 +53,16 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                    <fork>true</fork>-->
+<!--                    &lt;!&ndash; executable 可指定也可不用 &ndash;&gt;-->
+<!--                    <executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac</executable>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -60,6 +70,7 @@
                 <configuration>
                     <imageName>${docker.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
+                    <dockerHost>http://localhost:2375</dockerHost>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>

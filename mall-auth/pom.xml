@@ -143,6 +143,7 @@
                 <configuration>
                     <imageName>${docker.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
+                    <dockerHost>http://localhost:2375</dockerHost>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
