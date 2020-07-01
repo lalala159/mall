@@ -21,5 +21,5 @@ public interface PermissionDao {
      * @param roleId 角色id
      * @return 权限列表
      */
-    List<Permission> findByRoleId(Integer roleId);
+    List<Permission> findByRoleId(String roleId);
 }

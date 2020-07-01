@@ -3,7 +3,7 @@
 <mapper namespace="com.mall.auth.dao.RoleDao">
 
     <resultMap id="baseResultMap" type="com.mall.common.domain.Role">
-        <id property="id" column="id" jdbcType="INTEGER" />
+        <id property="id" column="id" jdbcType="VARCHAR" />
         <result property="roleName" column="role_name" jdbcType="VARCHAR" />
         <result property="roleCode" column="role_code" jdbcType="VARCHAR" />
         <result property="valid" column="valid" jdbcType="TINYINT" />
@@ -12,12 +12,8 @@
         <collection property="permissions" fetchType="eager" column="id" select="com.mall.auth.dao.PermissionDao.findByRoleId"></collection>
     </resultMap>
 
-    <select id="findByMemberId" resultMap="baseResultMap" parameterType="Integer">
-      select r.* from es_member_role mr,es_role r where mr.role_id = r.id and mr.member_id = #{memberId,jdbcType=INTEGER}
-    </select>
-
-    <select id="">
-        s
+    <select id="findByMemberId" resultMap="baseResultMap" parameterType="string">
+      select r.* from es_member_role mr,es_role r where mr.role_id = r.id and mr.member_id = #{memberId,jdbcType=VARCHAR}
     </select>
 
 

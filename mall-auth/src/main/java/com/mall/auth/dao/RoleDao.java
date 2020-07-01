@@ -22,5 +22,5 @@ public interface RoleDao {
      * @param memberId 用户id
      * @return 角色列表
      */
-    List<Role> findByMemberId(Integer memberId);
+    List<Role> findByMemberId(String memberId);
 }

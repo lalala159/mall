@@ -3,7 +3,7 @@
 <mapper namespace="com.mall.auth.dao.MemberDao">
 
     <resultMap id="baseResultMap" type="com.mall.common.domain.Member">
-        <id property="id" column="id" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="memberName" column="member_name" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="mobile" column="mobile" jdbcType="VARCHAR"/>

@@ -3,6 +3,8 @@ spring:
     nacos:
       discovery:
         server-addr: nacos.config.com:8848
+        namespace: 73062878-b3a4-4a28-a4fc-cc886cfb882d
+        group: DEV_GROUP
       config:
         server-addr: nacos.config.com:8848
         file-extension: yaml
