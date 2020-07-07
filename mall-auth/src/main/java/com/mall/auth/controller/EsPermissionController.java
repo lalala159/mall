@@ -1,10 +1,10 @@
 package com.mall.auth.controller;
 
 
-import com.mall.auth.domain.Menu;
 import com.mall.auth.domain.RouterVO;
 import com.mall.auth.service.EsPermissionService;
 import com.mall.auth.util.UUIDUtil;
+import com.mall.auth.domain.Menu;
 import com.mall.common.domain.Result;
 import com.mall.common.domain.auth.EsPermission;
 import com.mall.common.domain.auth.MenuVO;
@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author HC

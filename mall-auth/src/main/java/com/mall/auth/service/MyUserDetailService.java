@@ -1,10 +1,8 @@
 package com.mall.auth.service;
 
 
-import com.mall.auth.dao.EsPermissionDao;
 import com.mall.auth.dao.MemberDao;
 import com.mall.common.domain.Member;
-import com.mall.common.domain.Permission;
 import com.mall.common.domain.Role;
 import com.mall.common.domain.auth.EsPermission;
 import org.springframework.beans.factory.annotation.Autowired;

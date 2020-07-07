@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2020/7/1 17:26
  * @Version 1.0
  */
-@RequestMapping(value = "docker")
+@RestController
+@RequestMapping("/docker")
 public class TestController {
-    @GetMapping(value = "test")
+    @GetMapping("/test")
     public Result test(){
-        return Result.success("1.0");
+        return Result.success("2.0");
     }
 }

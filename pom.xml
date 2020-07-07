@@ -13,6 +13,8 @@
         <module>mall-order</module>
         <module>mall-sentinel</module>
         <module>mall-auth</module>
+        <module>mall-do</module>
+        <module>mall-info</module>
     </modules>
     <dependencies>
         <dependency>

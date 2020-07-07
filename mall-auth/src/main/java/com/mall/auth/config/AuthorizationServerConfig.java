@@ -1,7 +1,7 @@
 package com.mall.auth.config;
 
-import com.mall.auth.config.error.MssWebResponseExceptionTranslator;
 import com.mall.auth.service.MyUserDetailService;
+import com.mall.auth.config.error.MssWebResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

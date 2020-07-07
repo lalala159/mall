@@ -7,14 +7,14 @@ mvn clean package docker:build
 #查看镜像
 docker images
 #运行镜像
-docker run -p 9527:9527 -t springboot/mall-getway
+docker run -p 9527:9527 -t georgebom/mall-getway
 
 #导出镜像
 docker save  -o   D:\dockerImage\mall-getway.tar    docker.io/springboot/mall-getway:latest
 
 docker load -i D:\dockerImage\mall-getway.tar
 
-docker push 
+docker push georgebom/mall-getway:1.0
 
 docker rmi ${id}
 maven仓库目录不能加下划线、会导致编译找不到类

@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.EsRoleService;
 import com.mall.auth.util.UUIDUtil;
-import com.mall.common.domain.Member;
 import com.mall.common.domain.Result;
 import com.mall.common.domain.auth.EsRole;
 import org.springframework.beans.factory.annotation.Autowired;
