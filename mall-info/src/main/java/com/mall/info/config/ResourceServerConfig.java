@@ -1,4 +1,4 @@
-package com.mall.sys.config;
+package com.mall.info.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
