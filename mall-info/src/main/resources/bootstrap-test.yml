@@ -3,13 +3,13 @@ spring:
     nacos:
       discovery:
         server-addr: nacos.config.com:8848
-        namespace: 73062878-b3a4-4a28-a4fc-cc886cfb882d
-        group: DEV_GROUP
+        namespace: 0d95858d-ec50-46e1-9deb-6b704f2f353b
+        group: TEST_GROUP
       config:
         server-addr: nacos.config.com:8848
         file-extension: yaml
-        group: DEV_GROUP
-        namespace: 73062878-b3a4-4a28-a4fc-cc886cfb882d
+        group: TEST_GROUP
+        namespace: 0d95858d-ec50-46e1-9deb-6b704f2f353b
 management:
   endpoints:
     web:
@@ -17,4 +17,4 @@ management:
         include: "*"
 logging:
   pattern:
-    file: classpath:logConfig/log4j-dev.properties
+    file: classpath:logConfig/log4j-test.properties
