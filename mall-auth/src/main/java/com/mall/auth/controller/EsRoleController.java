@@ -25,7 +25,7 @@ public class EsRoleController {
 
     @GetMapping(value = "/queryList")
     public PageInfo queryList(Integer pageNum, Integer pageSize) {
-        PageHelper.offsetPage(pageNum-1, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<EsRole> list = esRoleService.queryList();
         return new PageInfo(list);
     }

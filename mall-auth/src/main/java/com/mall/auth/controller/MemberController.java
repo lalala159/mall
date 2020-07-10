@@ -63,7 +63,7 @@ public class MemberController {
 
     @PostMapping(value = "/queryList")
     public PageInfo queryList(Integer pageNum, Integer pageSize, String memberName, String mobile) {
-        PageHelper.offsetPage(pageNum-1, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<Member> list = memberService.queryList(memberName, mobile);
         return new PageInfo(list);
     }
