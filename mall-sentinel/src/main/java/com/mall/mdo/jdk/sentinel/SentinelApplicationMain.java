@@ -1,4 +1,4 @@
-package com.mall.sentinel;
+package com.mall.mdo.jdk.sentinel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

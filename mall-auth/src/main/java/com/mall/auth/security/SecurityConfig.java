@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * 〈security配置〉
  *
- * @author Curise
+ * @author HC
  * @create 2018/12/13
  * @since 1.0.0
  */
