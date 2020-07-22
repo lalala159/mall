@@ -20,16 +20,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .requestMatchers().antMatchers("/**")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/**").authenticated()
-                .and()
-                .httpBasic();
+        http.authorizeRequests()
+                .antMatchers(
+                        "/webjars/**",
+                        "/resources/**",
+                        "/swagger-ui.html",
+                        "/sys/auth/token",
+                        "/swagger-resources/**",
+                        "/doc.html",
+                        "/mallStore/**",
+                        "/v2/api-docs")
+                .permitAll()
+                .antMatchers("/**")
+                .authenticated();
     }
 }

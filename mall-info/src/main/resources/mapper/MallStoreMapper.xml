@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.info.dao.MallStoreDao">
+
+    <resultMap type="com.mall.info.domain.MallStore" id="MallStoreResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="storeUser" column="store_user" jdbcType="VARCHAR"/>
+        <result property="valid" column="valid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, store_name, parent_id, create_date, address, phone, store_user, valid      
+    </sql>
+
+    <!--通过Id查询单个-->
+    <select id="getById" resultMap="MallStoreResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="table_field"/>
+        from mall_store
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询列表-->
+    <select id="listByEntity" resultMap="MallStoreResultMap" parameterType="com.mall.info.domain.MallStore">
+        select
+        <include refid="table_field"/>
+        from mall_store
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="storeName != null">
+                and store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="address != null">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="storeUser != null">
+                and store_user = #{storeUser,jdbcType=VARCHAR}
+            </if>
+            <if test="valid != null">
+                and valid = #{valid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个-->
+    <select id="getByEntity" resultMap="MallStoreResultMap" parameterType="com.mall.info.domain.MallStore">
+        select
+        <include refid="table_field"/>
+        from mall_store
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="storeName != null">
+                and store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="address != null">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="storeUser != null">
+                and store_user = #{storeUser,jdbcType=VARCHAR}
+            </if>
+            <if test="valid != null">
+                and valid = #{valid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询列表，列表长度不为0-->
+    <select id="listByIds" resultMap="MallStoreResultMap" parameterType="list">
+        select
+        <include refid="table_field"/>
+        from mall_store
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.mall.info.domain.MallStore">
+        insert into mall_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="storeName != null">
+                store_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="storeUser != null">
+                store_user,
+            </if>
+            <if test="valid != null">
+                valid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="storeName != null">
+                #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="storeUser != null">
+                #{storeUser,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                #{valid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into mall_store
+        (id, store_name, parent_id, create_date, address, phone, store_user, valid)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+            (#{item.id,jdbcType=INTEGER}, #{item.storeName,jdbcType=VARCHAR}, #{item.parentId,jdbcType=INTEGER},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.address,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR},
+            #{item.storeUser,jdbcType=VARCHAR}, #{item.valid,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="com.mall.info.domain.MallStore">
+        update mall_store
+        <set>
+            <if test="storeName != null and storeName != ''">
+                store_name = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="storeUser != null and storeUser != ''">
+                store_user = #{storeUser,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                valid = #{valid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update mall_store
+        <set>
+            <if test="where.storeName == null and set.storeName != null and set.storeName != ''">
+                store_name = #{set.storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.parentId == null and set.parentId != null">
+                parent_id = #{set.parentId,jdbcType=INTEGER},
+            </if>
+            <if test="where.createDate == null and set.createDate != null">
+                create_date = #{set.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.address == null and set.address != null and set.address != ''">
+                address = #{set.address,jdbcType=VARCHAR},
+            </if>
+            <if test="where.phone == null and set.phone != null and set.phone != ''">
+                phone = #{set.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="where.storeUser == null and set.storeUser != null and set.storeUser != ''">
+                store_user = #{set.storeUser,jdbcType=VARCHAR},
+            </if>
+            <if test="where.valid == null and set.valid != null">
+                valid = #{set.valid,jdbcType=INTEGER},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.storeName != null">
+                and store_name = #{where.storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.parentId != null">
+                and parent_id = #{where.parentId,jdbcType=INTEGER}
+            </if>
+            <if test="where.createDate != null">
+                and create_date = #{where.createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.address != null">
+                and address = #{where.address,jdbcType=VARCHAR}
+            </if>
+            <if test="where.phone != null">
+                and phone = #{where.phone,jdbcType=VARCHAR}
+            </if>
+            <if test="where.storeUser != null">
+                and store_user = #{where.storeUser,jdbcType=VARCHAR}
+            </if>
+            <if test="where.valid != null">
+                and valid = #{where.valid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update mall_store
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="store_name = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.storeName}
+                </foreach>
+            </trim>
+            <trim prefix="parent_id = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.parentId}
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.createDate}
+                </foreach>
+            </trim>
+            <trim prefix="address = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.address}
+                </foreach>
+            </trim>
+            <trim prefix="phone = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.phone}
+                </foreach>
+            </trim>
+            <trim prefix="store_user = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.storeUser}
+                </foreach>
+            </trim>
+            <trim prefix="valid = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.valid}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from mall_store where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="com.mall.info.domain.MallStore">
+        delete from mall_store
+        <where>
+            <if test="storeName != null">
+                and store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="address != null">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="storeUser != null">
+                and store_user = #{storeUser,jdbcType=VARCHAR}
+            </if>
+            <if test="valid != null">
+                and valid = #{valid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </delete>
+
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from mall_store where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="countAll" resultType="int">
+        select count(id) from mall_store
+    </select>
+
+    <select id="countByEntity" parameterType="com.mall.info.domain.MallStore" resultType="int">
+        select count(id) from mall_store
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="storeName != null">
+                and store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="address != null">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="storeUser != null">
+                and store_user = #{storeUser,jdbcType=VARCHAR}
+            </if>
+            <if test="valid != null">
+                and valid = #{valid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,109 +1,97 @@
 package com.mall.info.config;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import org.springframework.beans.factory.annotation.Value;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.ApiKeyVehicle;
-import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author HC
+ */
+import org.springframework.beans.factory.annotation.Value;
+import springfox.documentation.builders.OAuthBuilder;
+import springfox.documentation.service.*;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+//把import写进来主要是为了确保万无一失
 
-import static springfox.documentation.builders.PathSelectors.regex;
-
-/**
- * @Author HC
- * @Date 2020/7/21 13:45
- * @Version 1.0
- */
 @Configuration
 @EnableSwagger2
-@Profile("swagger")
+@EnableKnife4j
 public class SwaggerConfiguration {
-    @Value("${spring.application.name}")
-    private String serviceName;
 
+    //这个东西是项目的根路径，也就是“/oauth/token”前面的那一串
+    //这个东西在配置文件里写的，大家也可以直接写死在配置文件中
+    @Value("${auth_server}")
+    private String AUTH_SERVER;
 
-    private String serviceDesc = "授权中心";
-
-
-//    @Value("${security.oauth2.client.client-id}")
-//    private String clientId;
-//    @Value("${security.oauth2.client.client-secret}")
-//    private String clientSecret;
-
-    // 授权中心地址
-    private String OAuthServerUri = "http://localhost:9527/auth";
-
-    private static final Predicate<String> SWAGGER_PATHS = PathSelectors.regex("^(?!.*error$).*");
-    public static final String securitySchemaOAuth2 = "oauth2schema";
-
+    /**
+     * 主要是这个方法，其他的方法是抽出去的，所以大家不要害怕为啥有这么多方法
+     * 在 basePackage 里面写需要生成文档的 controller 路径
+     */
     @Bean
-    public Docket postsApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("v2")
-                .apiInfo(apiInfo()).select().paths(postPaths())
-                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
-                .paths(springBootActuatorJmxPaths())
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.mall.info.controller"))
+                .paths(PathSelectors.any())
                 .build()
-                .securitySchemes(Collections.singletonList(securitySchema()))
+                .apiInfo(apiInfo())
+                .securitySchemes(Collections.singletonList(securityScheme()))
                 .securityContexts(Collections.singletonList(securityContext()));
     }
 
+    /**
+     * 这个方法主要是写一些文档的描述
+     */
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(serviceName).description(serviceDesc).build();
+        return new ApiInfo(
+                "DOPAMAN",
+                "This is a very pretty document!",
+                "1.0",
+                "",
+                new Contact("DOPAMAN", "", ""),
+                "", "", Collections.emptyList());
     }
-
-
-    private Predicate<String> postPaths() {
-        return regex("/.*");
-    }
-
-    private Predicate<String> springBootActuatorJmxPaths() {
-        return regex("^/(?!env|restart|pause|resume|refresh).*$");
-    }
-
 
     /**
-     * 这里使用 ResourceOwnerPasswordCredentialsGrant 也就是password授权方式
-     * @return
+     * 这个类决定了你使用哪种认证方式，我这里使用密码模式
+     * 其他方式自己摸索一下，完全莫问题啊
      */
-    private OAuth securitySchema() {
-        //这里设置 client 的 scope
-        final AuthorizationScope authorizationScope = new AuthorizationScope("openid", "允许测试阶段访问的所有接口");
-        final GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(OAuthServerUri + "/oauth/token");
-        return new OAuth(securitySchemaOAuth2, Arrays.asList(authorizationScope), Arrays.asList(grantType));
-    }
+    private SecurityScheme securityScheme() {
+        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(AUTH_SERVER + "/oauth/token");
 
-    private SecurityContext securityContext() {
-        return SecurityContext.builder()
-                .securityReferences(this.defaultAuth())
-                .forPaths(SWAGGER_PATHS)
+        return new OAuthBuilder()
+                .name("oauth2")
+                .grantTypes(Collections.singletonList(grantType))
+                .scopes(Arrays.asList(scopes()))
                 .build();
     }
 
-    @Bean
-    public SecurityConfiguration securityInfo() {
-        return new SecurityConfiguration("gateway", "123456", "", "", "", ApiKeyVehicle.HEADER, "", " ");
+    /**
+     * 这里设置 swagger2 认证的安全上下文
+     */
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(Collections.singletonList(new SecurityReference("oauth2", scopes())))
+                .forPaths(PathSelectors.any())
+                .build();
     }
 
-    private List<SecurityReference> defaultAuth() {
-        final AuthorizationScope authorizationScope =
-                new AuthorizationScope("openid", "允许测试阶段访问的所有接口");
-        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return Arrays.asList(
-                new SecurityReference(securitySchemaOAuth2, authorizationScopes));
+    /**
+     * 这里是写允许认证的scope
+     */
+    private AuthorizationScope[] scopes() {
+        return new AuthorizationScope[]{
+                new AuthorizationScope("read", "read")
+        };
     }
+
 }
+

@@ -20,6 +20,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   pageSizeZero: false #pageSize=0
-logging:
-  pattern:
-    file: classpath:logConfig/log4j-dev.properties
