@@ -35,7 +35,7 @@
         <pageHelper.version>5.1.10</pageHelper.version>
         <swagger.version>2.9.2</swagger.version>
         <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
-        <knife4j.version>2.0.4</knife4j.version>
+        <knife4j.version>2.0.3</knife4j.version>
         <docker.prefix>georgebom</docker.prefix>
     </properties>
 
@@ -112,10 +112,15 @@
             <!--整合Knife4j-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>2.0.4</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
