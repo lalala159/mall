@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.api.dao.EsMemberDao">
+
+    <resultMap type="com.mall.api.domain.EsMember" id="EsMemberResultMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="memberName" column="member_name" jdbcType="VARCHAR"/>
+        <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, user_name, member_name, store_id, password, email, sex, mobile, birthday, createTime      
+    </sql>
+
+    <!--通过Id查询单个-->
+    <select id="getById" resultMap="EsMemberResultMap" parameterType="java.lang.String">
+        select
+        <include refid="table_field"/>
+        from es_member
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询列表-->
+    <select id="listByEntity" resultMap="EsMemberResultMap" parameterType="com.mall.api.domain.EsMember">
+        select
+        <include refid="table_field"/>
+        from es_member
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="memberName != null">
+                and member_name = #{memberName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId,jdbcType=INTEGER}
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个-->
+    <select id="getByEntity" resultMap="EsMemberResultMap" parameterType="com.mall.api.domain.EsMember">
+        select
+        <include refid="table_field"/>
+        from es_member
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="memberName != null">
+                and member_name = #{memberName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId,jdbcType=INTEGER}
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询列表，列表长度不为0-->
+    <select id="listByIds" resultMap="EsMemberResultMap" parameterType="list">
+        select
+        <include refid="table_field"/>
+        from es_member
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.mall.api.domain.EsMember">
+        insert into es_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="memberName != null">
+                member_name,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null">
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into es_member
+        (id, user_name, member_name, store_id, password, email, sex, mobile, birthday, createTime)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+            (#{item.id,jdbcType=VARCHAR}, #{item.userName,jdbcType=VARCHAR}, #{item.memberName,jdbcType=VARCHAR},
+            #{item.storeId,jdbcType=INTEGER}, #{item.password,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR},
+            #{item.sex,jdbcType=INTEGER}, #{item.mobile,jdbcType=VARCHAR}, #{item.birthday,jdbcType=TIMESTAMP},
+            #{item.createtime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="com.mall.api.domain.EsMember">
+        update es_member
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null and memberName != ''">
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update es_member
+        <set>
+            <if test="where.userName == null and set.userName != null and set.userName != ''">
+                user_name = #{set.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.memberName == null and set.memberName != null and set.memberName != ''">
+                member_name = #{set.memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.storeId == null and set.storeId != null">
+                store_id = #{set.storeId,jdbcType=INTEGER},
+            </if>
+            <if test="where.password == null and set.password != null and set.password != ''">
+                password = #{set.password,jdbcType=VARCHAR},
+            </if>
+            <if test="where.email == null and set.email != null and set.email != ''">
+                email = #{set.email,jdbcType=VARCHAR},
+            </if>
+            <if test="where.sex == null and set.sex != null">
+                sex = #{set.sex,jdbcType=INTEGER},
+            </if>
+            <if test="where.mobile == null and set.mobile != null and set.mobile != ''">
+                mobile = #{set.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="where.birthday == null and set.birthday != null">
+                birthday = #{set.birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.createtime == null and set.createtime != null">
+                createTime = #{set.createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=VARCHAR}
+            </if>
+            <if test="where.userName != null">
+                and user_name = #{where.userName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.memberName != null">
+                and member_name = #{where.memberName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.storeId != null">
+                and store_id = #{where.storeId,jdbcType=INTEGER}
+            </if>
+            <if test="where.password != null">
+                and password = #{where.password,jdbcType=VARCHAR}
+            </if>
+            <if test="where.email != null">
+                and email = #{where.email,jdbcType=VARCHAR}
+            </if>
+            <if test="where.sex != null">
+                and sex = #{where.sex,jdbcType=INTEGER}
+            </if>
+            <if test="where.mobile != null">
+                and mobile = #{where.mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="where.birthday != null">
+                and birthday = #{where.birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.createtime != null">
+                and createTime = #{where.createtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update es_member
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="user_name = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.userName}
+                </foreach>
+            </trim>
+            <trim prefix="member_name = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.memberName}
+                </foreach>
+            </trim>
+            <trim prefix="store_id = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.storeId}
+                </foreach>
+            </trim>
+            <trim prefix="password = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.password}
+                </foreach>
+            </trim>
+            <trim prefix="email = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.email}
+                </foreach>
+            </trim>
+            <trim prefix="sex = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.sex}
+                </foreach>
+            </trim>
+            <trim prefix="mobile = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.mobile}
+                </foreach>
+            </trim>
+            <trim prefix="birthday = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.birthday}
+                </foreach>
+            </trim>
+            <trim prefix="createTime = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.createtime}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from es_member where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="com.mall.api.domain.EsMember">
+        delete from es_member
+        <where>
+            <if test="userName != null">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="memberName != null">
+                and member_name = #{memberName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId,jdbcType=INTEGER}
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from es_member where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="countAll" resultType="int">
+        select count(id) from es_member
+    </select>
+
+    <select id="countByEntity" parameterType="com.mall.api.domain.EsMember" resultType="int">
+        select count(id) from es_member
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="memberName != null">
+                and member_name = #{memberName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId,jdbcType=INTEGER}
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>
