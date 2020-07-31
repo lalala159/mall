@@ -39,4 +39,6 @@ public interface EsMemberDao {
 
     int countByEntity(EsMember esMember);
 
+    EsMember getMemberByOpenId(String openId);
+
 }

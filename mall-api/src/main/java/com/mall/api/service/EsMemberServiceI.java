@@ -34,4 +34,11 @@ public interface EsMemberServiceI {
     int countAll();
 
     int countByEntity(EsMember esMember);
+
+    /**
+     * @Description:根据openId获取用户
+     * @return:
+     * @param:
+    */
+    EsMember getMemberByOpenId(String openId);
 }

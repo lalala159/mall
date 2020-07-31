@@ -1,13 +1,16 @@
 package com.mall.api.controller;
 
-import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.nacos.common.util.Md5Utils;
+import com.mall.api.domain.EsMember;
 import com.mall.api.service.EsMemberServiceI;
+import com.mall.api.util.UUIDUtil;
 import com.mall.common.domain.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,9 +65,21 @@ public class Login {
                 Thread.sleep(300);
             }
             openid = obj.getString("openid");
+            if(StringUtils.isNotEmpty(openid)){
+                EsMember esMember = esMemberServiceI.getMemberByOpenId(openid);
+               if(esMember!=null){
+                   String token = Md5Utils.getMD5(openid, "UTF-8");
+                   esMember.setToken(token);
+                   esMemberServiceI.update(esMember);
+                   return Result.success("1");
+               }
+            }else{
+                return Result.fail("登陆异常");
+            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Result.success(openid);
+        return Result.fail();
     }
 }

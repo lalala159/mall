@@ -85,4 +85,9 @@ public class EsMemberServiceImpl implements EsMemberServiceI {
         return esMemberDao.countByEntity(esMember);
     }
 
+    @Override
+    public EsMember getMemberByOpenId(String openId) {
+        return esMemberDao.getMemberByOpenId(openId);
+    }
+
 }

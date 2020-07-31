@@ -72,4 +72,16 @@ public class EsMember {
     @ApiModelProperty(value = "注册日期")
     private Date createtime;
 
+    @ApiModelProperty(value = "openId")
+    private String openId;
+
+    @ApiModelProperty(value = "微信头像")
+    private String wxImg;
+
+    @ApiModelProperty(value = "微信昵称")
+    private String wxNickname;
+
+    @ApiModelProperty(value = "token")
+    private String token;
+
 }

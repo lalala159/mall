@@ -442,4 +442,8 @@
             </if>
         </where>
     </select>
+
+    <select id="getMemberByOpenId" resultType="com.mall.api.domain.EsMember">
+        select * from es_member where open_id = #{openId}
+    </select>
 </mapper>
