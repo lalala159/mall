@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.info.dao.zd.MallZidianDao">
+
+    <resultMap type="com.mall.info.domain.zd.MallZidian" id="MallZidianResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="zdCode" column="zd_code" jdbcType="VARCHAR"/>
+        <result property="zdmc" column="zdmc" jdbcType="VARCHAR"/>
+        <result property="pId" column="p_id" jdbcType="INTEGER"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, zd_code, zdmc, p_id, sort, create_date, update_date      
+    </sql>
+
+    <!--通过Id查询单个-->
+    <select id="getById" resultMap="MallZidianResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="table_field"/>
+        from mall_zidian
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询列表-->
+    <select id="listByEntity" resultMap="MallZidianResultMap" parameterType="com.mall.info.domain.zd.MallZidian">
+        select
+        <include refid="table_field"/>
+        from mall_zidian
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="zdCode != null">
+                and zd_code = #{zdCode,jdbcType=VARCHAR}
+            </if>
+            <if test="zdmc != null">
+                and zdmc = #{zdmc,jdbcType=VARCHAR}
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId,jdbcType=INTEGER}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个-->
+    <select id="getByEntity" resultMap="MallZidianResultMap" parameterType="com.mall.info.domain.zd.MallZidian">
+        select
+        <include refid="table_field"/>
+        from mall_zidian
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="zdCode != null">
+                and zd_code = #{zdCode,jdbcType=VARCHAR}
+            </if>
+            <if test="zdmc != null">
+                and zdmc = #{zdmc,jdbcType=VARCHAR}
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId,jdbcType=INTEGER}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询列表，列表长度不为0-->
+    <select id="listByIds" resultMap="MallZidianResultMap" parameterType="list">
+        select
+        <include refid="table_field"/>
+        from mall_zidian
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.mall.info.domain.zd.MallZidian">
+        insert into mall_zidian
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="zdCode != null">
+                zd_code,
+            </if>
+            <if test="zdmc != null">
+                zdmc,
+            </if>
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="zdCode != null">
+                #{zdCode,jdbcType=VARCHAR},
+            </if>
+            <if test="zdmc != null">
+                #{zdmc,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into mall_zidian
+        (id, zd_code, zdmc, p_id, sort, create_date, update_date)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+            (#{item.id,jdbcType=INTEGER}, #{item.zdCode,jdbcType=VARCHAR}, #{item.zdmc,jdbcType=VARCHAR},
+            #{item.pId,jdbcType=INTEGER}, #{item.sort,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateDate,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="com.mall.info.domain.zd.MallZidian">
+        update mall_zidian
+        <set>
+            <if test="zdCode != null and zdCode != ''">
+                zd_code = #{zdCode,jdbcType=VARCHAR},
+            </if>
+            <if test="zdmc != null and zdmc != ''">
+                zdmc = #{zdmc,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update mall_zidian
+        <set>
+            <if test="where.zdCode == null and set.zdCode != null and set.zdCode != ''">
+                zd_code = #{set.zdCode,jdbcType=VARCHAR},
+            </if>
+            <if test="where.zdmc == null and set.zdmc != null and set.zdmc != ''">
+                zdmc = #{set.zdmc,jdbcType=VARCHAR},
+            </if>
+            <if test="where.pId == null and set.pId != null">
+                p_id = #{set.pId,jdbcType=INTEGER},
+            </if>
+            <if test="where.sort == null and set.sort != null">
+                sort = #{set.sort,jdbcType=INTEGER},
+            </if>
+            <if test="where.createDate == null and set.createDate != null">
+                create_date = #{set.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateDate == null and set.updateDate != null">
+                update_date = #{set.updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.zdCode != null">
+                and zd_code = #{where.zdCode,jdbcType=VARCHAR}
+            </if>
+            <if test="where.zdmc != null">
+                and zdmc = #{where.zdmc,jdbcType=VARCHAR}
+            </if>
+            <if test="where.pId != null">
+                and p_id = #{where.pId,jdbcType=INTEGER}
+            </if>
+            <if test="where.sort != null">
+                and sort = #{where.sort,jdbcType=INTEGER}
+            </if>
+            <if test="where.createDate != null">
+                and create_date = #{where.createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateDate != null">
+                and update_date = #{where.updateDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update mall_zidian
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="zd_code = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.zdCode}
+                </foreach>
+            </trim>
+            <trim prefix="zdmc = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.zdmc}
+                </foreach>
+            </trim>
+            <trim prefix="p_id = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.pId}
+                </foreach>
+            </trim>
+            <trim prefix="sort = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.sort}
+                </foreach>
+            </trim>
+            <trim prefix="create_date = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.createDate}
+                </foreach>
+            </trim>
+            <trim prefix="update_date = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.updateDate}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from mall_zidian where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="com.mall.info.domain.zd.MallZidian">
+        delete from mall_zidian
+        <where>
+            <if test="zdCode != null">
+                and zd_code = #{zdCode,jdbcType=VARCHAR}
+            </if>
+            <if test="zdmc != null">
+                and zdmc = #{zdmc,jdbcType=VARCHAR}
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId,jdbcType=INTEGER}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from mall_zidian where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="countAll" resultType="int">
+        select count(id) from mall_zidian
+    </select>
+
+    <select id="countByEntity" parameterType="com.mall.info.domain.zd.MallZidian" resultType="int">
+        select count(id) from mall_zidian
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="zdCode != null">
+                and zd_code = #{zdCode,jdbcType=VARCHAR}
+            </if>
+            <if test="zdmc != null">
+                and zdmc = #{zdmc,jdbcType=VARCHAR}
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId,jdbcType=INTEGER}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="getTreeList" resultType="com.mall.common.domain.TreeVO">
+        select id,zdmc label, p_id parentId from mall_zidian where 1=1 order by sort
+    </select>
+</mapper>

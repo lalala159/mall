@@ -32,12 +32,20 @@ public class Result {
         return new Result(200, message);
     }
 
+    public static Result success(){
+        return new Result(200, "");
+    }
+
     public static Result success(Object data){
         return new Result(200, data);
     }
 
     public static Result fail(String message){
         return new Result(500, message);
+    }
+
+    public static Result fail(){
+        return new Result(500, "");
     }
 
     public static Result fail(Object data){
