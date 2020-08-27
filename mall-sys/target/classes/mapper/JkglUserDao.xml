@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mall.sys.dao.JkglUserDao">
-  <resultMap id="BaseResultMap" type="com.mall.sys.domain.JkglUser">
+<mapper namespace="JkglUserDao">
+  <resultMap id="BaseResultMap" type="JkglUser">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
   </resultMap>
@@ -18,11 +18,11 @@
     delete from jkgl_user
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.mall.sys.domain.JkglUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="JkglUser" useGeneratedKeys="true">
     insert into jkgl_user (USER_NAME)
     values (#{userName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.mall.sys.domain.JkglUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="JkglUser" useGeneratedKeys="true">
     insert into jkgl_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userName != null">
@@ -35,7 +35,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mall.sys.domain.JkglUser">
+  <update id="updateByPrimaryKeySelective" parameterType="JkglUser">
     update jkgl_user
     <set>
       <if test="userName != null">
@@ -44,7 +44,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mall.sys.domain.JkglUser">
+  <update id="updateByPrimaryKey" parameterType="JkglUser">
     update jkgl_user
     set USER_NAME = #{userName,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}

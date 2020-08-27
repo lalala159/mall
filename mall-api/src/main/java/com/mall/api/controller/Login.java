@@ -2,10 +2,9 @@ package com.mall.api.controller;
 
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.nacos.common.util.Md5Utils;
+import com.alibaba.nacos.common.utils.Md5Utils;
 import com.mall.api.domain.EsMember;
 import com.mall.api.service.EsMemberServiceI;
-import com.mall.api.util.UUIDUtil;
 import com.mall.common.domain.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

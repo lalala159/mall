@@ -1,7 +1,7 @@
 2020-05-22 14:21:55 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2020-05-22 14:21:57 [restartedMain] INFO  c.a.cloud.nacos.client.NacosPropertySourceBuilder - Loading nacos data, dataId: 'mall-sys-dev.yaml', group: 'DEV_GROUP'
 2020-05-22 14:21:57 [restartedMain] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-mall-sys-dev.yaml'}, BootstrapPropertySource {name='bootstrapProperties-mall-sys.yaml'}]
-2020-05-22 14:21:57 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - The following profiles are active: dev
+2020-05-22 14:21:57 [restartedMain] INFO  MallSysMainApplication - The following profiles are active: dev
 2020-05-22 14:21:58 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
 2020-05-22 14:21:58 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
 2020-05-22 14:21:58 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -29,7 +29,7 @@
 2020-05-22 14:22:05 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
 2020-05-22 14:22:05 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/mall-sys'
 2020-05-22 14:22:06 [restartedMain] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, mall-sys 192.168.1.111:8001 register finished
-2020-05-22 14:22:07 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - Started MallSysMainApplication in 14.225 seconds (JVM running for 18.347)
+2020-05-22 14:22:07 [restartedMain] INFO  MallSysMainApplication - Started MallSysMainApplication in 14.225 seconds (JVM running for 18.347)
 2020-05-22 14:22:08 [RMI TCP Connection(5)-192.168.1.111] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-05-22 14:22:08 [RMI TCP Connection(5)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2020-05-22 14:22:08 [RMI TCP Connection(5)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 10 ms
@@ -96,7 +96,7 @@ Caused by: io.lettuce.core.RedisCommandExecutionException: ERR Client sent AUTH,
 2020-05-22 14:47:45 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2020-05-22 14:47:47 [restartedMain] INFO  c.a.cloud.nacos.client.NacosPropertySourceBuilder - Loading nacos data, dataId: 'mall-sys-dev.yaml', group: 'DEV_GROUP'
 2020-05-22 14:47:47 [restartedMain] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-mall-sys-dev.yaml'}, BootstrapPropertySource {name='bootstrapProperties-mall-sys.yaml'}]
-2020-05-22 14:47:47 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - The following profiles are active: dev
+2020-05-22 14:47:47 [restartedMain] INFO  MallSysMainApplication - The following profiles are active: dev
 2020-05-22 14:47:48 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
 2020-05-22 14:47:48 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
 2020-05-22 14:47:49 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -124,7 +124,7 @@ Caused by: io.lettuce.core.RedisCommandExecutionException: ERR Client sent AUTH,
 2020-05-22 14:47:55 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
 2020-05-22 14:47:55 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/mall-sys'
 2020-05-22 14:47:55 [restartedMain] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, mall-sys 192.168.1.111:8001 register finished
-2020-05-22 14:47:56 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - Started MallSysMainApplication in 13.339 seconds (JVM running for 16.064)
+2020-05-22 14:47:56 [restartedMain] INFO  MallSysMainApplication - Started MallSysMainApplication in 13.339 seconds (JVM running for 16.064)
 2020-05-22 14:47:57 [RMI TCP Connection(2)-192.168.1.111] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-05-22 14:47:57 [RMI TCP Connection(2)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2020-05-22 14:47:57 [RMI TCP Connection(2)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 12 ms
@@ -140,7 +140,7 @@ Caused by: io.lettuce.core.RedisCommandExecutionException: ERR Client sent AUTH,
 2020-05-22 15:08:00 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2020-05-22 15:08:01 [restartedMain] INFO  c.a.cloud.nacos.client.NacosPropertySourceBuilder - Loading nacos data, dataId: 'mall-sys-dev.yaml', group: 'DEV_GROUP'
 2020-05-22 15:08:01 [restartedMain] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-mall-sys-dev.yaml'}, BootstrapPropertySource {name='bootstrapProperties-mall-sys.yaml'}]
-2020-05-22 15:08:01 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - The following profiles are active: dev
+2020-05-22 15:08:01 [restartedMain] INFO  MallSysMainApplication - The following profiles are active: dev
 2020-05-22 15:08:02 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
 2020-05-22 15:08:02 [restartedMain] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
 2020-05-22 15:08:02 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
@@ -168,7 +168,7 @@ Caused by: io.lettuce.core.RedisCommandExecutionException: ERR Client sent AUTH,
 2020-05-22 15:08:09 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
 2020-05-22 15:08:09 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/mall-sys'
 2020-05-22 15:08:09 [restartedMain] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, mall-sys 192.168.1.111:8001 register finished
-2020-05-22 15:08:10 [restartedMain] INFO  com.mall.sys.MallSysMainApplication - Started MallSysMainApplication in 12.207 seconds (JVM running for 14.875)
+2020-05-22 15:08:10 [restartedMain] INFO  MallSysMainApplication - Started MallSysMainApplication in 12.207 seconds (JVM running for 14.875)
 2020-05-22 15:08:11 [RMI TCP Connection(2)-192.168.1.111] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mall-sys] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-05-22 15:08:11 [RMI TCP Connection(2)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2020-05-22 15:08:11 [RMI TCP Connection(2)-192.168.1.111] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 10 ms

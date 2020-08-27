@@ -1,7 +1,5 @@
 package com.mall.auth.controller;
 
-
-import cn.hutool.core.date.DateTime;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mall.auth.service.MemberService;
@@ -24,6 +22,7 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,7 +96,7 @@ public class MemberController {
         esMember.setPassword(password);
         String[] roleId = roleIds.split(",");
         try {
-            esMember.setCreatetime(DateTime.now());
+            esMember.setCreatetime(new Date());
             memberService.insertSelective(esMember);
             for (String s : roleId) {
                 UserRole userRole = new UserRole();

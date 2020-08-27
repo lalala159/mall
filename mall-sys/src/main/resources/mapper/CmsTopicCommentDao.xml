@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mall.sys.dao.CmsTopicCommentDao">
-  <resultMap id="BaseResultMap" type="com.mall.sys.domain.CmsTopicComment">
+<mapper namespace="CmsTopicCommentDao">
+  <resultMap id="BaseResultMap" type="CmsTopicComment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
     <result column="topic_id" jdbcType="BIGINT" property="topicId" />
@@ -23,7 +23,7 @@
     delete from cms_topic_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mall.sys.domain.CmsTopicComment" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="CmsTopicComment" useGeneratedKeys="true">
     insert into cms_topic_comment (member_nick_name, topic_id, member_icon, 
       content, create_time, show_status
       )
@@ -31,7 +31,7 @@
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{showStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mall.sys.domain.CmsTopicComment" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="CmsTopicComment" useGeneratedKeys="true">
     insert into cms_topic_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="memberNickName != null">
@@ -74,7 +74,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mall.sys.domain.CmsTopicComment">
+  <update id="updateByPrimaryKeySelective" parameterType="CmsTopicComment">
     update cms_topic_comment
     <set>
       <if test="memberNickName != null">
@@ -98,7 +98,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mall.sys.domain.CmsTopicComment">
+  <update id="updateByPrimaryKey" parameterType="CmsTopicComment">
     update cms_topic_comment
     set member_nick_name = #{memberNickName,jdbcType=VARCHAR},
       topic_id = #{topicId,jdbcType=BIGINT},
