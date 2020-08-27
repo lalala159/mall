@@ -30,6 +30,6 @@ public class TestController {
     @PreAuthorize("hasAnyAuthority('select')")
     public ResponseUtil getUser(@PathVariable(value = "id") Integer id) {
         JkglUser jkglUser = userService.selectByPrimaryKey(id);
-        return new ResponseUtil(200, "成功,serverPort:" + serverPort, jkglUser);
+        return new ResponseUtil(200, "成功1,serverPort:" + serverPort, jkglUser);
     }
 }
